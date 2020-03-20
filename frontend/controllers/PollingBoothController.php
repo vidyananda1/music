@@ -27,7 +27,7 @@ class PollingBoothController extends Controller
     {
         $searchModel = new PollingBoothSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->query->andFilterWhere(['polling_booth.record_status'=>'1']);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

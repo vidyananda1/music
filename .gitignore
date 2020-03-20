@@ -40,6 +40,8 @@ phpunit.phar
 /backend/web/index-test.php
 /backend/web/robots.txt
 /common/config/main-local.php
+/phpmyadmin
+
 *.log
 *.txt
 *.data

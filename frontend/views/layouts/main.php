@@ -24,7 +24,7 @@ if (Yii::$app->controller->action->id === 'login') {
         <title>Election Data - <?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="hold-transition skin-black sidebar-mini">
+    <body class="hold-transition skin-red-light sidebar-mini">
     <?php $this->beginBody() ?>
     <div class="wrapper">
 

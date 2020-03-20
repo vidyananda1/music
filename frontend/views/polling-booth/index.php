@@ -3,17 +3,19 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-$this->title = 'Polling Booths';
+$this->title = 'POLLING BOOTHS';
 
 $record_status = ['1'=>'Active', '0'=>'Deleted'];
 ?>
+<br><br>
 <div class="polling-booth-index">
 
     <p>
         <?= Html::a('Create Polling Booth', ['create'], ['class' => 'btn btn-success openModal', 'size'=>'sm', 'header'=>'Create Polling Booth']) ?>
     </p>
 
-    <div class="table-responsive panel panel-body">
+    <div class="table-responsive panel panel-success">
+    <div class=" panel-heading">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -44,3 +46,5 @@ $record_status = ['1'=>'Active', '0'=>'Deleted'];
     </div>
 
 </div>
+</div>
+

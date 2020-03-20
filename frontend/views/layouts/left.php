@@ -1,4 +1,4 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar" style="background-color:#deb3a2">
 
     <section class="sidebar">
 
@@ -18,8 +18,18 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Gii', 'url' => ['/gii']],
-                    ['label' => 'Set Up', 'items' => [
-                        ['label' => 'Polling Booths', 'url' => ['/polling-booth']],
+                    ['label' => 'TASK', 'url' => ['/task']],
+                    ['label' => 'USERS', 'url' => ['/agent']],
+                    ['label' => 'VOTER', 'url' => ['/voter']],
+                    ['label' => 'ASSIGN VOTER', 'url' => ['/voter-assign']],
+
+                    [
+                        'label' => 'SET-UP',
+                        'icon' => ' fa fa-cog ',
+                        'items' => [
+                            ['label' => 'POLLING-BOOTHS', 'url' => ['/polling-booth']],
+                            ['label' => 'PARTY', 'url' => ['/party']],
+                            ['label' => 'SOCIAL STATUS', 'url' => ['/social-status']],
                     ]],
                 ],
             ]
