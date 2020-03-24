@@ -109,10 +109,16 @@ class TaskController extends Controller
                 return $this->redirect(['index']);
             }
         }
-
-        return $this->renderAjax('update', [
+        if(Yii::$app->user->identity->user_type==1){
+            return $this->renderAjax('update', [
             'model' => $model,
         ]);
+        }else{
+            return $this->renderAjax('agentupdate', [
+            'model' => $model,
+        ]);
+        }
+        
     }
 
     /**

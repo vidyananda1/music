@@ -22,7 +22,8 @@
         "2amigos/yii2-date-picker-widget": "~1.0",
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-export": "@dev",
-        "dmstr/yii2-adminlte-asset": "^2.1"
+        "dmstr/yii2-adminlte-asset": "^2.1",
+        "moonlandsoft/yii2-phpexcel": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

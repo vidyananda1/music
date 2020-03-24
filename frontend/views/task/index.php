@@ -107,7 +107,7 @@ $this->title = 'TASKS';
             [
             'value' => function ($model) {
                 
-                    return Html::a('Update Task', ['task/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-success openModal','size'=>'md', 'header'=>'Update Task',]); 
+                    return Html::a(' Update Task', ['task/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-danger openModal fa fa-edit','size'=>'md', 'header'=>'Update Task',]); 
               
                         },
                         'format' => 'raw',

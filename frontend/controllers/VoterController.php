@@ -8,6 +8,18 @@ use app\models\VoterSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\web\Response;
+use yii\helpers\ArrayHelper;
+use app\models\Upload;
+use app\models\PollingBooth;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use common\models\User;
+use yii\data\ArrayDataProvider;
+
+
+
+
 
 /**
  * VoterController implements the CRUD actions for Voter model.
@@ -130,6 +142,118 @@ class VoterController extends Controller
 
         return $this->renderAjax('_form', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionVoterupload()
+    {
+      $modelUpload = new Upload();
+      //$course = ArrayHelper::map(Courses::find()->all(), 'course_id', 'course');
+      if($modelUpload->load(Yii::$app->request->post())) {
+          //New Employee UploadedFile///////////////////////////////////////////////////////////////
+              if(!$modelUpload->file = UploadedFile::getInstance($modelUpload, 'file')) {
+                Yii::$app->session->setFlash('danger', 'Error while uploading file');
+                return $this->redirect(Yii::$app->request->referrer);
+              }
+              $modelUpload->file=UploadedFile::getInstance($modelUpload, 'file');
+              $modelUpload->file->saveAs('uploads/' . $modelUpload->file->baseName . '.' . $modelUpload->file->extension);
+              // echo $model->file->type;die;
+              $inputFile = 'uploads/'.$modelUpload->file->name;
+             
+              try{
+                $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+                $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+                $objPHPExcel = $objReader->load($inputFile);
+              }catch(Exception $e){
+                echo $e;
+                die;
+              }
+
+              $sheet = $objPHPExcel->getSheet(0);
+              $highestRow = $sheet->getHighestRow();
+              $highestColumn = $sheet->getHighestColumn();
+              $col_arr = array();
+              $rowdata = $sheet->rangeToArray('A1'.':'.$highestColumn.'1',NULL,TRUE,FALSE);
+              $row = $rowdata[0];
+              foreach($row as $r)
+              {
+                if(empty($r))
+                break;
+                $col_arr[]=$r;
+              }
+                $polling = ArrayHelper::map(PollingBooth::find()->asArray()->all(),'name','id');
+
+              //getting data and transform into collection
+              $x = "A";
+              $x = ord($x)+count($col_arr) - 1;
+              $highestColumn = chr($x);
+              $flag = 1;
+              $vot = 0;
+              $transaction = Yii::$app->db->beginTransaction();
+              try{
+                  for($row = 2;$row <= $highestRow;$row++)
+                  {
+                    $rowdata = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+                    $d = $rowdata[0];
+
+                      $exists = Voter::find()->where(['voter_id'=>$d[1]])->andWhere(['record_status'=>'1'])->one();
+                      if($exists)
+                      {
+                        continue;
+                      }
+                        $vot++;
+                      //Registration insert
+                     $voter = new Voter();
+                     $voter->voter_id = "$d[1]";
+                     $name = trim($d[2]," ");
+                     $voter->name = $name;
+                     $g=$d[3];
+                     $poll = isset($polling[$g])? $polling[$g] :'';
+                     $voter->polling_booth_id = $poll;
+                     $house =  trim($d[4]," ");
+                     $voter->house_no = $house;
+                     $ph = trim($d[5]," ");
+                     $voter->phone = $ph; 
+                     $adds= trim($d[6]," ");
+                     $voter->address = $adds;
+                     $voter->record_status = '1';
+                     $voter->createdDate = date('Y-m-d');
+                     $voter->createdBy = Yii::$app->user->identity->id;
+
+                      if(!$flag=$reg->save())
+                      {
+                        var_dump($reg->errors);
+                        die;
+                        break;
+                      }
+                      $flag=$reg->save();
+                      
+                  }
+
+                  if($flag)
+                  {
+                    // echo 1; die;
+                    $transaction->commit();
+                    unlink($inputFile);
+                    $text = "$vot Voters  Uploaded successfully.";
+                      Yii::$app->session->setFlash('success',"$text");
+                    return $this->redirect(Yii::$app->request->referrer);
+                  }else {
+                    $transaction->rollBack();
+                    unlink($inputFile);
+                    Yii::$app->session->setFlash('danger',"New Voters upload failed.");
+                    return $this->redirect(Yii::$app->request->referrer);
+                  }
+                }catch(Exception $e){
+                  // echo 'e';die;
+                  $transaction->rollBack();
+                  unlink($inputFile);
+                }
+      }
+      return $this->renderAjax('voterupload',
+        [
+            'modelUpload'=>$modelUpload,
+        
         ]);
     }
 

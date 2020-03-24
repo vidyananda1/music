@@ -23,7 +23,9 @@ $emp = ['GOVT. EMPLOYEE'=>'Govt Employee','PVT. EMPLOYEE'=>'Pvt Employee','UNEMP
 
 
     <div class="row">
-        
+        <div class="col-sm-3 pull-right">
+            <?= Html::a(' Bulk Voters Upload ', ['voterupload'], ['class' => 'btn btn-danger openModal fa fa-file', 'size'=>'md', 'header'=>'Upload Bulk Voters','name'=>'submit']) ?>
+        </div>
         <div class="col-sm-2">
             <?= Html::a('Create Voter', ['create'], ['class' => ' btn btn-success openModal', 'size'=>'md', 'header'=>'Create voter','name'=>'submit']) ?>
         </div>
