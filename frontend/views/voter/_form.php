@@ -12,6 +12,7 @@ use app\models\Party;
 $social = ArrayHelper::map(SocialStatus::find()->where(['record_status'=>"1"])->all(), 'id', 'name');
 $polling = ArrayHelper::map(PollingBooth::find()->where(['record_status'=>"1"])->all(), 'id', 'name');
 $party = ArrayHelper::map(Party::find()->where(['record_status'=>"1"])->all(), 'id', 'name');
+$benificiary = ['1'=>'Benificiary', '0'=>'Non-Benificiary'];
 ?>
 
 <div class="voter-form">
@@ -56,6 +57,12 @@ $party = ArrayHelper::map(Party::find()->where(['record_status'=>"1"])->all(), '
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'employee_status')->dropDownList([ 'GOVT. EMPLOYEE' => 'GOVT. EMPLOYEE', 'PVT. EMPLOYEE' => 'PVT. EMPLOYEE', 'UNEMPLYED' => 'UNEMPLYED', ], ['prompt' => '']) ?>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?= $form->field($model, 'benificiary')->radioList($benificiary) ?>
         </div>
         
     </div>

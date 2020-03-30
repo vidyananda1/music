@@ -18,7 +18,7 @@ class VoterSearch extends Voter
     {
         return [
             [['id', 'polling_booth_id', 'social_status_id', 'last_party_id', 'interest_party_ticket_id', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'house_no', 'address', 'gender', 'phone', 'interest', 'employee_status', 'created_date', 'updated_date', 'record_status'], 'safe'],
+            [['name', 'house_no', 'address', 'gender', 'phone', 'interest', 'employee_status', 'created_date', 'updated_date', 'record_status','benificiary'], 'safe'],
         ];
     }
 
@@ -61,6 +61,7 @@ class VoterSearch extends Voter
             'id' => $this->id,
             'polling_booth_id' => $this->polling_booth_id,
             'social_status_id' => $this->social_status_id,
+            'benificiary' => $this->benificiary,
             'last_party_id' => $this->last_party_id,
             'interest_party_ticket_id' => $this->interest_party_ticket_id,
             'created_by' => $this->created_by,

@@ -50,6 +50,9 @@ $emp = ['GOVT. EMPLOYEE'=>'Govt Employee','PVT. EMPLOYEE'=>'Pvt Employee','UNEMP
 
             //'id',
             'name',
+            'phone',
+                
+            
             //'polling_booth_id',
             [
                 'attribute'=>'polling_booth_id',
@@ -114,10 +117,7 @@ $emp = ['GOVT. EMPLOYEE'=>'Govt Employee','PVT. EMPLOYEE'=>'Pvt Employee','UNEMP
                 'attribute'=>'gender',
                 'filter'=>'',
             ],
-            [
-                'attribute'=>'phone',
-                'filter'=>'',
-            ],
+            
             [
                 'attribute'=>'interest',
                 'filter'=>'',

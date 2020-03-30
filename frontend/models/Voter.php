@@ -46,7 +46,7 @@ class Voter extends \yii\db\ActiveRecord
             [['name', 'polling_booth_id', 'social_status_id', 'last_party_id', 'interest_party_ticket_id', 'created_by'], 'required'],
             [['polling_booth_id', 'social_status_id', 'last_party_id', 'interest_party_ticket_id', 'created_by', 'updated_by'], 'integer'],
             [['gender', 'employee_status'], 'string'],
-            [['created_date', 'updated_date'], 'safe'],
+            [['created_date', 'updated_date','benificiary'], 'safe'],
             [['name', 'house_no', 'address', 'interest'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 10],
             [['record_status'], 'string', 'max' => 1],
@@ -74,6 +74,7 @@ class Voter extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'created_date' => 'Created Date',
             'updated_by' => 'Updated By',
+            'benificiary' => 'Benificiary',
             'updated_date' => 'Updated Date',
             'record_status' => 'Record Status',
         ];
