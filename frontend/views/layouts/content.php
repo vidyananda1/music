@@ -12,9 +12,9 @@ use dmstr\widgets\Alert;
 
 <footer class="main-footer" style="background-color: #e3e1d8">
 	<div class="pull-left">
-		&copy; 2020 LI & Sons Enterprises
+		&copy; 2020 Restuarant Management
 	</div>
     <div class="text-right">
-        <a href="https://globizs.com" target="_blank"><img style="max-height: 24px;" src="images/power.png"></a>
+        <a href="https://hadron.com" target="_blank"><img width="50" height="40" src="images/hadron.png"></a>
     </div>
 </footer>

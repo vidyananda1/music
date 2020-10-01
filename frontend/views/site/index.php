@@ -7,7 +7,7 @@ use app\models\Customer;
 $this->title = '';
 ?>
 
-<H2 style="text-align:center;color:#7d9c0e;"><b>ELECTION MANAGEMENT SYSTEM</b></H2>
+<H2 style="text-align:center;color:#7d9c0e;"><b>NK GROUPS CAFE MANAGEMENT</b></H2>
   <br>
   <br>
   
@@ -18,56 +18,7 @@ setlocale(LC_MONETARY, 'en_IN');
 
 $today = date('Y-m-d');
 
-/*if(Yii::$app->user->identity->type == "foodwifi")
-{
 
-  $pending = Orders::find()->where(['order_status_id'=>1])->count();
-  $confirmed = Orders::find()->where(['order_status_id'=>2])->count();
-  $ready = Orders::find()->where(['order_status_id'=>3])->count();
-  $pickedup = Orders::find()->where(['order_status_id'=>4])->count();
-  $delivered = Orders::find()->where(['order_status_id'=>5])->count();
-  $canceled = Orders::find()->where(['order_status_id'=>6])->count();
-  $customer = Customer::find()->where(['status'=>'Active'])->count();
-  $total_amt = Orders::find()->where('order_status_id!=6')->sum('grand_total');
-  $todaytotal_amt = Orders::find()->where('order_status_id!=6 and date(created_date)="'.date('Y-m-d').'"')->sum('grand_total');
-
-
-  $total_amt = html_entity_decode('&#8377; ').money_format('%!i', $total_amt);
-  $todaytotal_amt = html_entity_decode('&#8377; ').money_format('%!i', $todaytotal_amt);
-  
-}
-else if(Yii::$app->user->identity->type == "restaurant")
-{
-  $res_id = Yii::$app->user->identity->type_id;
-  $pending = Orders::find()->where(['order_status_id'=>1,'restaurant_id'=>$res_id])->count();
-  $confirmed = Orders::find()->where(['order_status_id'=>2,'restaurant_id'=>$res_id])->count();
-  $ready = Orders::find()->where(['order_status_id'=>3,'restaurant_id'=>$res_id])->count();
-  $pickedup = Orders::find()->where(['order_status_id'=>4,'restaurant_id'=>$res_id])->count();
-  $delivered = Orders::find()->where(['order_status_id'=>5,'restaurant_id'=>$res_id])->count();
-  $canceled = Orders::find()->where(['order_status_id'=>6,'restaurant_id'=>$res_id])->count();
-  $customer = Customer::find()->where(['status'=>'Active'])->count();
-  $total_amt = Orders::find()->where('order_status_id!=6 and restaurant_id='.$res_id)->sum('grand_total');
-  $todaytotal_amt = Orders::find()->where('order_status_id!=6 and restaurant_id='.$res_id.' and date(created_date)="'.date('Y-m-d').'"')->sum('grand_total');
-
-  $total_amt = html_entity_decode('&#8377; ').money_format('%!i', $total_amt);
-  $todaytotal_amt = html_entity_decode('&#8377; ').money_format('%!i', $todaytotal_amt);
-
-
-}
-*/
-  /*$employee= Employee::find()->where(['record_status'=>1])->count();
-  $approval=ApprovalStatus::find()->Where(['OR', ['app_status' => 'Approved'],['app_status' => 'Approved Without Pay']])->one();
-  $pending=ApprovalStatus::find()->Where(['app_status' => 'Pending'])->one();
-  $reject=ApprovalStatus::find()->Where(['app_status' => 'Reject'])->one();
-
-  $leave_approved= ApplyStatus::find()->leftJoin('apply_leave','apply_status.apply_id=apply_leave.id')->where(['apply_status.approval_status_id'=>$approval->id])->count();
-
-  $leave_pending= ApplyStatus::find()->leftJoin('apply_leave','apply_status.apply_id=apply_leave.id')->where(['apply_status.approval_status_id'=>$pending->id])->count();
-
-  $leave_reject= ApplyStatus::find()->leftJoin('apply_leave','apply_status.apply_id=apply_leave.id')->where(['apply_status.approval_status_id'=>$reject->id])->count();*/
-  //$car = CarDetails::find()->where(['record_status'=>'1'])->count();
-  //$driver = DriverDetails::find()->where(['record_status'=>'1'])->count();
-  //$customer = Customer::find()->where(['record_status'=>'1'])->count();
 
 ?>
 <div class="row">
@@ -75,9 +26,9 @@ else if(Yii::$app->user->identity->type == "restaurant")
           <!-- small box -->
           <div class="small-box" style="background-color:#8df28e">
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF AGENTS</b></h4>
+              <h4 style="text-align:center;"><b>NO OF EMPLOYEES</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b></b></h4></div>
+            <div><h4 style="text-align:center;"><b>17</b></h4></div>
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
@@ -87,13 +38,13 @@ else if(Yii::$app->user->identity->type == "restaurant")
     </div>
     <div class="col-lg-6 col-xs-6">
           <!-- small box -->
-          <div class="small-box" style="background-color:#fcf095">
+          <div class="small-box" style="background-color:#96cafa">
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF PARTIES</b></h4>
+              <h4 style="text-align:center;"><b>NO OF ITEMS</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b></b></h4></div>
+            <div><h4 style="text-align:center;"><b>55</b></h4></div>
             <div class="icon">
-              <i class="fa fa-send"></i>
+              <i class="fa fa-cutlery"></i>
             </div>
             
                 <a href="index.php?r=car-details/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
@@ -104,32 +55,34 @@ else if(Yii::$app->user->identity->type == "restaurant")
  <div class="row">
     <div class="col-lg-6 col-xs-6">
           <!-- small box -->
-          <div class="small-box " style="background-color:#faa2a5;">
+          <div class="small-box" style="background-color:#ffd359">
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF VOTERS</b></h4>
+              <h4 style="text-align:center;"><b>TOTAL CUSTOMERS</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b></b></h4></div>
+            <div><h4 style="text-align:center;"><b>125</b></h4></div>
             <div class="icon">
-              <i class="fa fa-thumbs-up"></i>
+              <i class="fa fa-user-plus"></i>
             </div>
-            <a href="index.php?r=driver-details/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a>       
+            
+                <a href="index.php?r=car-details/index" class="small-box-footer"> </a> 
           </div>
     </div>
-
     <div class="col-lg-6 col-xs-6">
           <!-- small box -->
-          <div class="small-box " style="background-color:#96cafa;">
+          <div class="small-box" style="background-color:#a489f5">
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF POLLING-BOOTHS</b></h4>
+              <h4 style="text-align:center;"><b>TOTAL SALES</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b></b></h4></div>
+            <div><h4 style="text-align:center;"><b>Rs 150000</b></h4></div>
             <div class="icon">
-              <i class="fa fa-home"></i>
+              <i class="fa fa-money"></i>
             </div>
-            <a href="index.php?r=driver-details/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a>       
+            
+                <a href="index.php?r=car-details/index" class="small-box-footer"> </a> 
           </div>
     </div>
-</div>
+ </div>
+ 
 
     
 <div class="site-index">
@@ -142,6 +95,463 @@ else if(Yii::$app->user->identity->type == "restaurant")
 
 
 </div>
+
+ <script type="text/javascript">
+    function drawAllCharts() {
+        // <?//= $this->render('js/line_charts.js') ?>
+
+        
+
+        <?= $this->render('js/bar_charts.js'/*, ['d'=>$data]*/) ?>
+
+        
+
+        // <?//= $this->render('js/area_charts.js') ?>
+    }
+</script>
+<style type="text/css">
+  .card {
+    margin-top: 12px;
+    border: thin solid #ccc;
+    border-radius: 4px;
+}
+.card-body, .card-header, .card-footer {
+    padding: 12px;
+}
+.card-label {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 34px;
+}
+.card-value {
+    font-size: 36px;
+}
+.card-summary {
+    font-size: 10px;
+    padding-left: 8px;
+}
+.card-header {
+    border-bottom: thin solid #ccc;
+}
+.card-footer {
+    border-top: thin solid #ccc;
+}
+.c1 {color: #2196f3;}
+.c2 {color: #69b2f8;}
+.c3 {color: #f18fb3;}
+.c4 {color: #4db6ac;}
+.c5 {color: #81c784;}
+.male {color: #42a5f5;}
+.female {color: #f48fb1;}
+.footer-value {
+    font-size: 28px;
+}
+.footer-value small {
+    font-size: 50%;
+}
+.col-xs-5th-1, .col-xs-5th-2, .col-xs-5th-3, .col-xs-5th-4 {
+  float: left;
+}
+
+.col-xs-5th-5 {
+  float: left;
+  width: 100%;
+}
+
+.col-xs-5th-4 {
+  width: 80%;
+}
+
+.col-xs-5th-3 {
+  width: 60%;
+}
+
+.col-xs-5th-2 {
+  width: 40%;
+}
+
+.col-xs-5th-1 {
+  width: 20%;
+}
+
+.col-xs-5th-pull-5 {
+  right: 100%;
+}
+
+.col-xs-5th-pull-4 {
+  right: 80%;
+}
+
+.col-xs-5th-pull-3 {
+  right: 60%;
+}
+
+.col-xs-5th-pull-2 {
+  right: 40%;
+}
+
+.col-xs-5th-pull-1 {
+  right: 20%;
+}
+
+.col-xs-5th-pull-0 {
+  right: auto;
+}
+
+.col-xs-5th-push-5 {
+  left: 100%;
+}
+
+.col-xs-5th-push-4 {
+  left: 80%;
+}
+
+.col-xs-5th-push-3 {
+  left: 60%;
+}
+
+.col-xs-5th-push-2 {
+  left: 40%;
+}
+
+.col-xs-5th-push-1 {
+  left: 20%;
+}
+
+.col-xs-5th-push-0 {
+  left: auto;
+}
+
+.col-xs-5th-offset-5 {
+  margin-left: 100%;
+}
+
+.col-xs-5th-offset-4 {
+  margin-left: 80%;
+}
+
+.col-xs-5th-offset-3 {
+  margin-left: 60%;
+}
+
+.col-xs-5th-offset-2 {
+  margin-left: 40%;
+}
+
+.col-xs-5th-offset-1 {
+  margin-left: 20%;
+}
+
+.col-xs-5th-offset-0 {
+  margin-left: 0%;
+}
+
+@media (min-width: 768px) {
+  .col-sm-5th-1, .col-sm-5th-2, .col-sm-5th-3, .col-sm-5th-4 {
+    float: left;
+  }
+
+  .col-sm-5th-5 {
+    float: left;
+    width: 100%;
+  }
+
+  .col-sm-5th-4 {
+    width: 80%;
+  }
+
+  .col-sm-5th-3 {
+    width: 60%;
+  }
+
+  .col-sm-5th-2 {
+    width: 40%;
+  }
+
+  .col-sm-5th-1 {
+    width: 20%;
+  }
+
+  .col-sm-5th-pull-5 {
+    right: 100%;
+  }
+
+  .col-sm-5th-pull-4 {
+    right: 80%;
+  }
+
+  .col-sm-5th-pull-3 {
+    right: 60%;
+  }
+
+  .col-sm-5th-pull-2 {
+    right: 40%;
+  }
+
+  .col-sm-5th-pull-1 {
+    right: 20%;
+  }
+
+  .col-sm-5th-pull-0 {
+    right: auto;
+  }
+
+  .col-sm-5th-push-5 {
+    left: 100%;
+  }
+
+  .col-sm-5th-push-4 {
+    left: 80%;
+  }
+
+  .col-sm-5th-push-3 {
+    left: 60%;
+  }
+
+  .col-sm-5th-push-2 {
+    left: 40%;
+  }
+
+  .col-sm-5th-push-1 {
+    left: 20%;
+  }
+
+  .col-sm-5th-push-0 {
+    left: auto;
+  }
+
+  .col-sm-5th-offset-5 {
+    margin-left: 100%;
+  }
+
+  .col-sm-5th-offset-4 {
+    margin-left: 80%;
+  }
+
+  .col-sm-5th-offset-3 {
+    margin-left: 60%;
+  }
+
+  .col-sm-5th-offset-2 {
+    margin-left: 40%;
+  }
+
+  .col-sm-5th-offset-1 {
+    margin-left: 20%;
+  }
+
+  .col-sm-5th-offset-0 {
+    margin-left: 0%;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-5th-1, .col-md-5th-2, .col-md-5th-3, .col-md-5th-4 {
+    float: left;
+  }
+
+  .col-md-5th-5 {
+    float: left;
+    width: 100%;
+  }
+
+  .col-md-5th-4 {
+    width: 80%;
+  }
+
+  .col-md-5th-3 {
+    width: 60%;
+  }
+
+  .col-md-5th-2 {
+    width: 40%;
+  }
+
+  .col-md-5th-1 {
+    width: 20%;
+  }
+
+  .col-md-5th-pull-5 {
+    right: 100%;
+  }
+
+  .col-md-5th-pull-4 {
+    right: 80%;
+  }
+
+  .col-md-5th-pull-3 {
+    right: 60%;
+  }
+
+  .col-md-5th-pull-2 {
+    right: 40%;
+  }
+
+  .col-md-5th-pull-1 {
+    right: 20%;
+  }
+
+  .col-md-5th-pull-0 {
+    right: auto;
+  }
+
+  .col-md-5th-push-5 {
+    left: 100%;
+  }
+
+  .col-md-5th-push-4 {
+    left: 80%;
+  }
+
+  .col-md-5th-push-3 {
+    left: 60%;
+  }
+
+  .col-md-5th-push-2 {
+    left: 40%;
+  }
+
+  .col-md-5th-push-1 {
+    left: 20%;
+  }
+
+  .col-md-5th-push-0 {
+    left: auto;
+  }
+
+  .col-md-5th-offset-5 {
+    margin-left: 100%;
+  }
+
+  .col-md-5th-offset-4 {
+    margin-left: 80%;
+  }
+
+  .col-md-5th-offset-3 {
+    margin-left: 60%;
+  }
+
+  .col-md-5th-offset-2 {
+    margin-left: 40%;
+  }
+
+  .col-md-5th-offset-1 {
+    margin-left: 20%;
+  }
+
+  .col-md-5th-offset-0 {
+    margin-left: 0%;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-5th-1, .col-lg-5th-2, .col-lg-5th-3, .col-lg-5th-4 {
+    float: left;
+  }
+
+  .col-lg-5th-5 {
+    float: left;
+    width: 100%;
+  }
+
+  .col-lg-5th-4 {
+    width: 80%;
+  }
+
+  .col-lg-5th-3 {
+    width: 60%;
+  }
+
+  .col-lg-5th-2 {
+    width: 40%;
+  }
+
+  .col-lg-5th-1 {
+    width: 20%;
+  }
+
+  .col-lg-5th-pull-5 {
+    right: 100%;
+  }
+
+  .col-lg-5th-pull-4 {
+    right: 80%;
+  }
+
+  .col-lg-5th-pull-3 {
+    right: 60%;
+  }
+
+  .col-lg-5th-pull-2 {
+    right: 40%;
+  }
+
+  .col-lg-5th-pull-1 {
+    right: 20%;
+  }
+
+  .col-lg-5th-pull-0 {
+    right: auto;
+  }
+
+  .col-lg-5th-push-5 {
+    left: 100%;
+  }
+
+  .col-lg-5th-push-4 {
+    left: 80%;
+  }
+
+  .col-lg-5th-push-3 {
+    left: 60%;
+  }
+
+  .col-lg-5th-push-2 {
+    left: 40%;
+  }
+
+  .col-lg-5th-push-1 {
+    left: 20%;
+  }
+
+  .col-lg-5th-push-0 {
+    left: auto;
+  }
+
+  .col-lg-5th-offset-5 {
+    margin-left: 100%;
+  }
+
+  .col-lg-5th-offset-4 {
+    margin-left: 80%;
+  }
+
+  .col-lg-5th-offset-3 {
+    margin-left: 60%;
+  }
+
+  .col-lg-5th-offset-2 {
+    margin-left: 40%;
+  }
+
+  .col-lg-5th-offset-1 {
+    margin-left: 20%;
+  }
+
+  .col-lg-5th-offset-0 {
+    margin-left: 0%;
+  }
+}
+</style>
+<?php
+$this->registerJs(<<<JS
+google.charts.load('current', {packages: ['corechart', 'line', 'bar']});
+google.charts.setOnLoadCallback(drawAllCharts);
+
+$("#d_id").change(function() {
+    $("#district-filter").submit();
+});
+JS
+);
 
 
 

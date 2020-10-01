@@ -19,8 +19,9 @@ dmstr\web\AdminLteAsset::register($this);
 </head>
 <body class="login-page">
 
-<?php $this->beginBody() ?>
 
+<?php $this->beginBody() ?>
+	
     <?= $content ?>
 
 <?php $this->endBody() ?>

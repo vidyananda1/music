@@ -23,6 +23,7 @@
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-export": "@dev",
         "dmstr/yii2-adminlte-asset": "^2.1",
+        "phpoffice/phpexcel": "dev-develop",
         "moonlandsoft/yii2-phpexcel": "*"
     },
     "require-dev": {

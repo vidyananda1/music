@@ -5,12 +5,16 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Sign In';
 
 ?>
-
-<div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>LI & Sons</b><div>Election Data</div></a>
+<div>
+    <img style="width: 100%;z-index: -1;filter: blur(1px);" src="images/food.jpg">
+</div>
+<div  class="name">
+      <b>NK GROUP'S LIFFE CAFE</b>
     </div>
-    <div class="login-box-body">
+    <br>
+<div class="log">
+    
+    <div class="login-box-body login">
         <p class="login-box-msg">Sign in to start your session</p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
@@ -31,8 +35,27 @@ $this->title = 'Sign In';
         </div>
 
         <?php ActiveForm::end(); ?>
-        <br><br><br><br>
-        <p><a href="https://globizs.com" target="_blank"><img style="max-height: 28px;" src="images/power.png"></a></p>
+        
+      
 
     </div>
 </div>
+<style type="text/css">
+    .log{
+        position: absolute;
+        left:65%;
+        top:23%;
+        width: 30%;
+        box-shadow: 15px 15px 10px #241d16;
+        
+    }
+    .name{
+        position: absolute;
+        left:59%;
+        top:8%;
+        color: white;
+        font-size:40px;
+        opacity: 0.9;
+
+    }
+</style>
