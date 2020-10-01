@@ -10,12 +10,11 @@ use yii\grid\GridView;
 $this->title = 'Taxes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<br><br>
 <div class="tax-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Tax', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tax', ['create'], ['class' => 'btn btn-success openModal','size'=>'md', 'header'=>'Create Tax']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,14 +25,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'tax_name',
-            'tax_percent',
-            'created_by',
-            'created_date',
+            //'tax_percent',
+            [
+                'attribute'=>'tax_percent',
+                'filter'=>'',
+            ],
+            //'created_by',
+            //'created_date',
             //'record_status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template'=>'{delete}'],
         ],
     ]); ?>
 

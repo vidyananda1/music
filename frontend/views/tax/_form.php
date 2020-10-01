@@ -16,13 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tax_percent')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_date')->textInput() ?>
-
-    <?= $form->field($model, 'record_status')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
+    <div class="form-group text-center">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 

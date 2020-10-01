@@ -9,6 +9,7 @@ use app\models\OrderDetailSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Model;
 
 /**
  * OrderDetailController implements the CRUD actions for OrderDetail model.
@@ -69,31 +70,50 @@ class OrderDetailController extends Controller
         $modelitem = [new OrderItem()];
 
        if ($model->load(Yii::$app->request->post()) ) {
+            $model->customer_id = "12345";
             $model->updated_by = 1;//Yii::$app->user->id;
 
             $modelitem = Model::createMultiple(OrderItem::classname());
             Model::loadMultiple($modelitem, Yii::$app->request->post());
 
-            $transaction = Yii::$app->db->beginTransaction();
-            try {
-                foreach ($modelitem as  $sta) {
-                    if(!empty($sta->order_detail_id)) {
-                        $sta->order_detail_id = $model->id;
-                        if (!($flag = $sta->save(false)) ) {
-                            $transaction->rollBack();
-                            Yii::$app->session->setflash('danger', 'Failed to save!');
-                            return $this->redirect(['order-detail/index']);
+           
+            // // validate all models
+            // $valid = $model->validate();
+            // $valid = Model::validateMultiple($modelitem) && $valid;
+            
+            //if ($valid) {
+                 //die('4');
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($modelitem as $sta) {
+                            $sta->order_detail_id = $model->id;
+                            $sta->updated_by = 1;//Yii::$app->user->id;
+                            if (! ($flag = $sta->save(false))) {
+                                //die('4');
+                                $transaction->rollBack();
+                                Yii::$app->session->setFlash('danger', 'Failed to Order!');
+                                return $this->redirect(['order-detail/index']);
+                                //break;
+                            }
                         }
                     }
+                    if ($flag) {
+                         //die('3');
+                        $transaction->commit();
+                        Yii::$app->session->setFlash('success', 'Successully Ordered!');
+                        return $this->redirect(['order-detail/index']);
+                    }
+                    // else{
+                    //     die('2');
+                    // }
+                    
+                } catch (Exception $e) {
+                    die('1');
+                    $transaction->rollBack();
                 }
-                $transaction->commit();
-                Yii::$app->session->setflash('success', 'Successfully created!');
-                return $this->redirect(['order-detail/index']);
-            } catch (Exception $e) {
-                $transaction->rollBack();
-                Yii::$app->session->setflash('danger', 'Failed to save!');
-                return $this->redirect(['order-detail/index']);
-            }
+            //}
+           //die('0'); 
         }
 
         return $this->renderAjax('create', [
