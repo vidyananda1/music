@@ -10,12 +10,11 @@ use yii\grid\GridView;
 $this->title = 'Offers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<br><br>
 <div class="offer-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Offer', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Offer', ['create'], ['class' => 'btn btn-success openModal','size'=>'md', 'header'=>'Create Discount']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,14 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'dis_name',
             'dis_percent',
-            'created_by',
-            'created_date',
+            // 'created_by',
+            // 'created_date',
             //'record_status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template'=>'{delete}'],
         ],
     ]); ?>
 

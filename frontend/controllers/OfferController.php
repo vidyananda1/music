@@ -37,6 +37,7 @@ class OfferController extends Controller
     {
         $searchModel = new OfferSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andFilterWhere(['record_status'=>'1']);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -66,11 +67,20 @@ class OfferController extends Controller
     {
         $model = new Offer();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->dis_name = strtoupper($model->dis_name);
+            $model->created_by = 1;//Yii::$app->user->id;
+            if(!$model->save()){
+                print_r($model->errors);die;
+                Yii::$app->session->setFlash('danger', 'Failed to Add Discount!');
+                return $this->redirect(Yii::$app->request->referrer);
+            }else{
+                Yii::$app->session->setFlash('success', 'Discount Successfully Added!');
+                return $this->redirect(['index']);
+            }
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -104,8 +114,9 @@ class OfferController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $model->record_status='0';
+        $model->save();
         return $this->redirect(['index']);
     }
 

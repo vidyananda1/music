@@ -66,8 +66,17 @@ class ItemsController extends Controller
     {
         $model = new Items();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+         if ($model->load(Yii::$app->request->post()) ) {
+            $model->name = strtoupper($model->name);
+            $model->created_by = 1;//Yii::$app->user->id;
+            if(!$model->save()){
+                print_r($model->errors);die;
+                Yii::$app->session->setFlash('danger', 'Failed to Add Items!');
+                return $this->redirect(Yii::$app->request->referrer);
+            }else{
+                Yii::$app->session->setFlash('success', 'Items Successfully Added!');
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->renderAjax('create', [

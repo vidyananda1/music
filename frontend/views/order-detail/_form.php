@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Items;
 use app\models\Category;
+use app\models\Offer;
 use app\models\Tax;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
@@ -16,28 +17,31 @@ use wbraganca\dynamicform\DynamicFormWidget;
 $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
 $cat= ArrayHelper::map(Category::find()->all(), 'id', 'cat_name');
 $tax= ArrayHelper::map(Tax::find()->all(), 'id', 'tax_name');
+$dis= ArrayHelper::map(Offer::find()->all(), 'id', 'dis_name');
 ?>
 
 <div class="order-detail-form">
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
     <div class="row">
-        <div class="col-md-4 col-xs-4">
+        <div class="col-md-12 col-xs-12">
             <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true]) ?>
         </div>
-         <div class="col-md-4 col-xs-4">
+         <div class="col-md-12 col-xs-12">
             <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-4 col-xs-4">
+    </div>
+    <div class="row">
+         <div class="col-md-12 col-xs-12">
             <?= $form->field($model, 'customer_address')->textarea(['rows' => 6]) ?>
         </div>
     </div>
     <div class="row">
         <div class="col-md-3 col-xs-3">
-            <?= $form->field($model, 'tax_id')->dropdownList($tax,['prompt'=>'Select Tax'])->label('Tax');  ?>
+            <?= $form->field($model, 'tax_id')->dropdownList($tax,['prompt'=>'Select Tax'])->label('Tax (if any)');  ?>
         </div>
          <div class="col-md-3 col-xs-3">
-            <?= $form->field($model, 'discount')->textInput()->label('Discount (if any)')  ?>
+            <?= $form->field($model, 'discount')->dropdownList($dis,['prompt'=>'Select Discount'])->label('Discount (if any)');  ?>
         </div>
          <div class="col-md-3 col-xs-3">
             <?= $form->field($model, 'price')->textInput(['maxlength' => true])->label('Price Total') ?>
@@ -92,7 +96,7 @@ $tax= ArrayHelper::map(Tax::find()->all(), 'id', 'tax_name');
                        <?= $form->field($modelsitem, "[{$i}]category_id")->dropdownList($cat,['prompt'=>'Select Category','class'=>'select'])->label('Category'); ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($modelsitem, "[{$i}]no_of_items")->textInput()->label('No Of Items'); ?>
+                        <?= $form->field($modelsitem, "[{$i}]no_of_items")->textInput(['class'=>'item'])->label('No Of Items'); ?>
                     </div> 
                 </div>
             </div>
@@ -107,7 +111,7 @@ $tax= ArrayHelper::map(Tax::find()->all(), 'id', 'tax_name');
     <br>
 
     <div class="form-group text-center">
-        <?= Html::submitButton($modelsitem->isNewRecord ? 'Update' : 'Update', ['class' => 'btn btn-lg btn-success']) ?>
+        <?= Html::submitButton($modelsitem->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-lg btn-success']) ?>
     
     </div>
 

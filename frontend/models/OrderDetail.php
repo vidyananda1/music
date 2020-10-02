@@ -39,13 +39,13 @@ class OrderDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id','price', 'total', 'updated_by'], 'required'],
+            [['price', 'total', 'updated_by'], 'required'],
             [['customer_address'], 'string'],
             [['discount', 'tax_id', 'updated_by'], 'integer'],
             [['price', 'total'], 'number'],
-            [['updated_date'], 'safe'],
+            [['customer_id','updated_date'], 'safe'],
             [['customer_name'], 'string', 'max' => 255],
-            [['customer_id'], 'string', 'max' => 200],
+            //[['customer_id'], 'string', 'max' => 200],
             [['customer_phone'], 'string', 'max' => 10],
             [['record_status'], 'string', 'max' => 1],
         ];

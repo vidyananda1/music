@@ -37,6 +37,7 @@ class TaxController extends Controller
     {
         $searchModel = new TaxSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andFilterWhere(['record_status'=>'1']);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -66,11 +67,20 @@ class TaxController extends Controller
     {
         $model = new Tax();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+         if ($model->load(Yii::$app->request->post()) ) {
+            $model->tax_name = strtoupper($model->tax_name);
+            $model->created_by = 1;//Yii::$app->user->id;
+            if(!$model->save()){
+                print_r($model->errors);die;
+                Yii::$app->session->setFlash('danger', 'Failed to Add Tax!');
+                return $this->redirect(Yii::$app->request->referrer);
+            }else{
+                Yii::$app->session->setFlash('success', 'Tax Successfully Added!');
+                return $this->redirect(['index']);
+            }
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -104,7 +114,9 @@ class TaxController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+       $model = $this->findModel($id);
+       $model->record_status='0';
+       $model->save();
 
         return $this->redirect(['index']);
     }
