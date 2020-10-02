@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use common\models\User;
 
 /**
  * This is the model class for table "employee".
@@ -31,6 +32,9 @@ class Employee extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $name;
+    public $user_name;
+    public $password;
     public function rules()
     {
         return [
@@ -41,6 +45,7 @@ class Employee extends \yii\db\ActiveRecord
             [['employee_name'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 10],
             [['record_status'], 'string', 'max' => 1],
+            [['name','user_name','password'],'string']
         ];
     }
 
@@ -60,6 +65,32 @@ class Employee extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
             'updated_date' => 'Updated Date',
             'record_status' => 'Record Status',
+            'name' => "Role",
+            'user_name'=> 'User Name',
+            'password' => 'Password'
         ];
+    }
+
+    public function signup()
+    {
+       
+        $user = new User();
+        $rand_id = rand(10,1000);
+        if(!User::findOne($rand_id))
+            $user->id = $rand_id;
+        $user->username = $this->user_name;
+
+        // $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        // $user->generateEmailVerificationToken();
+        if($user->save())
+            return  $user->id;
+        else {
+            print_r($user->errors);
+            die;
+        }
+        return 0;
+
     }
 }

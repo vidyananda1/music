@@ -8,7 +8,7 @@ use app\models\EmployeeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\rbac\DbManager;
 /**
  * EmployeeController implements the CRUD actions for Employee model.
  */
@@ -66,14 +66,45 @@ class EmployeeController extends Controller
     {
         $model = new Employee();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $transaction = Yii::$app->db->beginTransaction();
+            $user_id = $model->signup();
+            if(!$user_id){
+                // Yii::$app->session->set('toast', 'Failed to create user');
+                Yii::$app->session->setFlash('danger', 'Failed to create user');
+
+            }
+            else {
+                $auth = new DbManager;
+                $auth->init();
+                $role = $auth->getRole($model->name);
+                // echo $model->name;
+                // echo "<pre>";
+                // print_r($role);
+                // echo "</pre>";
+                // die;
+                $auth->assign($role, $user_id);
+                $model->user_id = $user_id;
+                $model->created_by = 1;
+                if($model->save()) {
+                    $transaction->commit();
+                    Yii::$app->session->setFlash('success', 'User created Successfull !!');
+                }
+                else{
+                    Yii::$app->session->setFlash("danger","Failed to create user, some error has occured");
+                    $transaction->rollback();
+                    print_r($model->errors);die;
+                }
+                return $this->redirect(['employee/index']);
+            } 
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
     }
+
+    
 
     /**
      * Updates an existing Employee model.
@@ -109,6 +140,21 @@ class EmployeeController extends Controller
         return $this->redirect(['index']);
     }
 
+
+    public function actionResetpassword($id){
+        $employee = $this->findModel($id);
+        $user = \common\models\User::findOne($employee->user_id);
+        if ($employee->load(Yii::$app->request->post()) ) {
+            $user->setPassword($employee->password);
+            $user->save();
+            Yii::$app->session->setFlash("success","Password reset successfully");
+            return $this->redirect(['employee/index']);
+        }
+        return $this->render('_resetPassword', [
+            'model' => $employee,
+        ]);
+        
+    }
     /**
      * Finds the Employee model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
