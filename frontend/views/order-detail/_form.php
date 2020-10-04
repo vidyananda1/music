@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Items;
@@ -89,14 +90,11 @@ $dis= ArrayHelper::map(Offer::find()->all(), 'id', 'dis_name');
                     
                     <div class="col-sm-4">
                         
-                        <?= $form->field($modelsitem, "[{$i}]item_id")->dropdownList($item,['prompt'=>'Select Item','class'=>'select'])->label('Items'); ?>
+                        <?= $form->field($modelsitem, "[{$i}]item_id")->dropdownList($item,['prompt'=>'Select Item','class'=>'select item_id'])->label('Items'); ?>
                     </div> 
-                    <div class="col-sm-4">
-                        
-                       <?= $form->field($modelsitem, "[{$i}]category_id")->dropdownList($cat,['prompt'=>'Select Category','class'=>'select'])->label('Category'); ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $form->field($modelsitem, "[{$i}]no_of_items")->textInput(['class'=>'item'])->label('No Of Items'); ?>
+                   
+                    <div class="col-sm-4" >
+                        <?= $form->field($modelsitem, "[{$i}]no_of_items")->textInput(['class'=>'no_item'])->label('No Of Items'); ?>
                     </div> 
                 </div>
             </div>
@@ -119,16 +117,16 @@ $dis= ArrayHelper::map(Offer::find()->all(), 'id', 'dis_name');
 
 </div>
 <?php
-
+$url = Url::to(["amount"]);
 $this->registerJs('
 $(".select").select2();
 $(".dynamicform_wrapper").on("beforeInsert", function(e, item) {
-    console.log("beforeInsert");
+    // console.log("beforeInsert");
 });
 
 $(".dynamicform_wrapper").on("afterInsert", function(e, item) {
     $(".select").select2();
-    console.log("afterInsert");
+    // console.log("afterInsert");
 });
 
 $(".dynamicform_wrapper").on("beforeDelete", function(e, item) {
@@ -138,12 +136,103 @@ $(".dynamicform_wrapper").on("beforeDelete", function(e, item) {
     return true;
 });
 
-$(".dynamicform_wrapper").on("afterDelete", function(e) {
-    console.log("Deleted item!");
+$(".dynamicform_wrapper").on("afterDelete",async function(e) {
+    // console.log("Deleted item!");
+    getData();
+
 });
 
-$(".dynamicform_wrapper").on("limitReached", function(e, item) {
+$(".dynamicform_wrapper").on("limitReached",async function (e, item) {
     alert("Limit reached");
 });
 
+$(document).on("change", ".no_item", async  function main() {
+  getData();
+});
+$(document).on("change", ".item_id", async  function () {
+    getData();
+  });
+  
+  $(document).on("change", "#orderdetail-tax_id", async  function () {
+    getData();
+  });
+  
+  $(document).on("change", "#orderdetail-discount", async  function () {
+    getData();
+  });
+async function getData() {
+    var arr = [];
+    const numberItems = document.querySelectorAll(".no_item");
+    var hasData = 1;
+     await numberItems.forEach(function(a) {
+        if(!getSum(a)){
+         hasData = 0;
+         return ;
+        }
+         arr.push(getSum(a));
+    });
+    if(!hasData) {
+         return ;
+    }
+    else {
+         return  requestSum(arr);
+    }
+}
+
+function getSum(a) {
+    var id = a.id;
+    var item_no = id.substring(
+        id.indexOf("-")+1,
+        id.lastIndexOf("-"),
+    )
+    var orderItemId = `orderitem-${item_no}-item_id`;
+    var orderItemValue = document.getElementById(orderItemId).value;
+    const price =  $("#orderdetail-price");
+    const amount =  $("#orderdetail-total");
+    // console.log(a.value);
+    if(orderItemValue=="" || a.value=="") {
+        // console.log("value empty");
+        price.val(0);
+        amount.val(0);
+        return 0;
+    }
+    return {"itemId":orderItemValue,"itemCount":a.value};
+    
+}
+
+function requestSum(arr) {
+    var tax =  $("#orderdetail-tax_id").val();
+    var discount =  $("#orderdetail-discount").val();
+    const price =  $("#orderdetail-price");
+    const amount =  $("#orderdetail-total");
+    const url = "'.$url.'";
+    if(tax=="")
+        tax = 0 ;
+    if(discount=="")
+        discount = 0;
+    $.ajax({
+        url : "'.$url.'",
+        type : "POST",
+        data : {
+            "arr" :arr,"discount":discount,"tax":tax
+        },
+        dataType:"json",
+        success : function(response) {              
+            // var obj = JSON.parse(data);
+            amount.val(response["amount"]);
+            price.val(response["sum"]);
+        },
+        error : function(request,error)
+        {
+            alert("Request: "+JSON.stringify(request));
+        }
+    });
+    return 1;
+}
+
 ') ?>
+<style>
+.no_item{
+width: 150px;
+}
+</style>
