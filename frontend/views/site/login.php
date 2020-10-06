@@ -8,8 +8,8 @@ $this->title = 'Sign In';
 <div>
     <img style="width: 100%;z-index: -1;filter: blur(1px);" src="images/food.jpg">
 </div>
-<div  class="name">
-      <b>NK GROUP'S LIFFE CAFE</b>
+<div >
+      <img class="name" src="images/nklogo.jpeg">
     </div>
     <br>
 <div class="log">
@@ -51,11 +51,9 @@ $this->title = 'Sign In';
     }
     .name{
         position: absolute;
-        left:59%;
-        top:8%;
-        color: white;
-        font-size:40px;
-        opacity: 0.9;
-
+        
+        top:0%;
+        opacity: 0.8;
+        width: 100%;
     }
 </style>

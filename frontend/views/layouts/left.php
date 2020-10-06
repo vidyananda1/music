@@ -14,7 +14,7 @@
                     // ['label' => 'Gii', 'url' => ['/gii']],
                     ['label' => 'ORDER DETAILS', 'url' => ['/order-detail']],
                     ['label' => 'RECEIPT', 'url' => ['/customer-receipt']],
-                    // ['label' => 'VOTER', 'url' => ['/voter']],
+                    ['label' => 'ORDER ITEMS', 'url' => ['/order-item']],
                     // ['label' => 'ACTIVITY', 'url' => ['/activity']],
                     // ['label' => 'STOCK', 'url' => ['/stock-ledger']],
                     // ['label' => 'ASSIGN VOTER', 'url' => ['/voter-assign']],

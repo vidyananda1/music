@@ -75,6 +75,21 @@ class CustomerReceiptController extends Controller
         ]);
     }
 
+    public function actionPrint($print_id)
+    {
+        $model = new CustomerReceipt();
+
+        // if ($model->load(Yii::$app->request->post()) ) {
+        //    // return $this->redirect(['view', 'id' => $model->id]);
+        // }
+        
+
+        return $this->renderAjax('print', [
+            'model' => $model,
+            'print_id'=>$print_id,
+        ]);
+    }
+
     /**
      * Updates an existing CustomerReceipt model.
      * If update is successful, the browser will be redirected to the 'view' page.

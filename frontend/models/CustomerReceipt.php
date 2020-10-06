@@ -29,7 +29,7 @@ class CustomerReceipt extends \yii\db\ActiveRecord
     {
         return [
             [['receipt_no', 'customer_id'], 'required'],
-            [['created_date'], 'safe'],
+            [['created_date','order_detail_id'], 'safe'],
             [['receipt_no'], 'string', 'max' => 255],
             [['customer_id'], 'string', 'max' => 200],
         ];
@@ -45,6 +45,7 @@ class CustomerReceipt extends \yii\db\ActiveRecord
             'receipt_no' => 'Receipt No',
             'customer_id' => 'Customer ID',
             'created_date' => 'Created Date',
+            'order_detail_id' => 'Order Detail ID',
         ];
     }
 }

@@ -4,6 +4,7 @@ use dmstr\widgets\Alert;
 ?>
 <div class="content-wrapper">
     <section class="content" >
+        <img style="width: 100%;margin-top: -14px;"  src="images/nklogo.jpeg">
         <?= Alert::widget() ?>
         <div class="page-title"><?= $this->title ?></div>
         <?= $content ?>
