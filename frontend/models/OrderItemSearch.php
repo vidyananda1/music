@@ -17,8 +17,7 @@ class OrderItemSearch extends OrderItem
     public function rules()
     {
         return [
-            [['id', 'order_detail_id', 'item_id', 'category_id', 'no_of_items', 'updated_by'], 'integer'],
-            [['item_price'], 'number'],
+            [['id', 'order_detail_id', 'item_id','no_of_items', 'updated_by'], 'integer'],
             [['updated_date', 'record_status'], 'safe'],
         ];
     }
@@ -62,9 +61,7 @@ class OrderItemSearch extends OrderItem
             'id' => $this->id,
             'order_detail_id' => $this->order_detail_id,
             'item_id' => $this->item_id,
-            'category_id' => $this->category_id,
             'no_of_items' => $this->no_of_items,
-            'item_price' => $this->item_price,
             'updated_by' => $this->updated_by,
             'updated_date' => $this->updated_date,
         ]);
