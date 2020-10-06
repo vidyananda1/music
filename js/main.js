@@ -1,4 +1,5 @@
 $(document).on('click', '.openModal', function() {
+    console.log("open modal!!");
     var size = $(this).attr('size');
     var url = $(this).attr('href');
     var header = $(this).attr("header");

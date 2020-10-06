@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success openModal ','size'=>'lg', 'header'=>'Create Employee']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -37,9 +37,27 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_date',
             //'record_status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}{view}',
+                'buttons' => [
+                    'option'=>['class'=>'row'],
+                     'view' => function($id, $model) {
+                    return Html::a('<span "><b class="fa fa-key"></b></span>', ['employee/resetpassword', 'id' => $model['id']], ['title' => 'Reset Password', ]);
+                },
+                
+            ],
+            'contentOptions' =>[
+                'class'=>"flexcell"
+            ],
+            ],
         ],
     ]); ?>
 
 
 </div>
+<style>
+    .flexcell{
+        display: flex;
+    }
+</style>

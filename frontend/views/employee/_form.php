@@ -6,6 +6,12 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Employee */
 /* @var $form yii\widgets\ActiveForm */
+$roles = ['admin'=>'Admin','sub_staff'=>"Sub Staff",'staff'=>"Staff"];
+// $role1 = \Yii::$app->authManager->getRolesByUser(1);
+// // echo "role:array_keys($role1)[0]";
+// echo $model->user_id;die;
+// print_r(array_keys($role1));die;
+
 ?>
 
 <div class="employee-form">
@@ -18,17 +24,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'user_name')->textInput() ?>
+    
+    <?= $form->field($model, 'password')->passwordInput() ?>
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_date')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_date')->textInput() ?>
-
-    <?= $form->field($model, 'record_status')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->dropDownList($roles,['class'=>'dropdown']) ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
