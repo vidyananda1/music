@@ -39,7 +39,7 @@ class OrderDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['price', 'total', 'updated_by'], 'required'],
+            [['price', 'total', 'updated_by','customer_address','customer_phone'], 'required'],
             [['customer_address'], 'string'],
             [['discount', 'tax_id', 'updated_by'], 'integer'],
             [['price', 'total'], 'number'],

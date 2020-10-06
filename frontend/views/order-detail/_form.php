@@ -136,35 +136,35 @@ $(".dynamicform_wrapper").on("beforeDelete", function(e, item) {
     return true;
 });
 
-$(".dynamicform_wrapper").on("afterDelete",async function(e) {
+$(".dynamicform_wrapper").on("afterDelete", function(e) {
     // console.log("Deleted item!");
     getData();
 
 });
 
-$(".dynamicform_wrapper").on("limitReached",async function (e, item) {
+$(".dynamicform_wrapper").on("limitReached", function (e, item) {
     alert("Limit reached");
 });
 
-$(document).on("change", ".no_item", async  function main() {
+$(document).on("change", ".no_item",   function main() {
   getData();
 });
-$(document).on("change", ".item_id", async  function () {
+$(document).on("change", ".item_id",   function () {
     getData();
   });
   
-  $(document).on("change", "#orderdetail-tax_id", async  function () {
+  $(document).on("change", "#orderdetail-tax_id",   function () {
     getData();
   });
   
-  $(document).on("change", "#orderdetail-discount", async  function () {
+  $(document).on("change", "#orderdetail-discount",   function () {
     getData();
   });
-async function getData() {
+ function getData() {
     var arr = [];
     const numberItems = document.querySelectorAll(".no_item");
     var hasData = 1;
-     await numberItems.forEach(function(a) {
+    numberItems.forEach(function(a) {
         if(!getSum(a)){
          hasData = 0;
          return ;
