@@ -10,7 +10,7 @@ use app\models\Offer;
 $receipt = CustomerReceipt::find()->where(['order_detail_id'=>$order_detail_id])->one();
 $itemNames = ArrayHelper::map(Items::find()->all(),"id","name");
 $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
-$taxes = ArrayHelper::map(Tax::find()->all(),"id","name");
+$taxes = ArrayHelper::map(Tax::find()->all(),"id","tax_name");
 $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
 // echo "<pre>"; print_r($orderDetails);echo "</pre>";
 // echo "<pre>"; print_r($orderItems);echo "</pre>";
@@ -155,7 +155,7 @@ hr {
   text-align: right;
 }
 .total {
-  margin-left: 300px;
+  margin-left: 218px;
 }
 </style>
 

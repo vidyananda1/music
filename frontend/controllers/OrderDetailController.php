@@ -122,7 +122,7 @@ class OrderDetailController extends Controller
                         $transaction->commit();
                         Yii::$app->session->setFlash('success', 'Successully Ordered!');
                         // return $this->redirect(['order-detail/index']);
-                        return $this->redirect(['customer-receipt/print','order_detail_id' => $model->id]);
+                        return $this->redirect(['customer-receipt/print','order_detail_id' => $model->id,'target'=>'_blank']);
                     }
                     // else{
                     //     die('2');
