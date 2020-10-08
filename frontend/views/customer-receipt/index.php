@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\ActionColumn'],
             [
             'value' => function ($model) {
-              return Html::a('Print', ['customer-receipt/print', 'print_id' => $model->order_detail_id], ['class' => 'btn btn-sm btn-danger ','target'=>'_blank']);  
+              return Html::a('Print', ['customer-receipt/print', 'order_detail_id' => $model->order_detail_id], ['class' => 'btn btn-sm btn-danger ','target'=>'_blank']);  
                         },
                         'format' => 'raw',
                     ],

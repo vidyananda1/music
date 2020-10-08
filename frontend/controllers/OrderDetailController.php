@@ -121,7 +121,8 @@ class OrderDetailController extends Controller
                          //To do: add custromer Id (random number CUS1234),add recipt number(rand NK1234)  add to customer receipt table
                         $transaction->commit();
                         Yii::$app->session->setFlash('success', 'Successully Ordered!');
-                        return $this->redirect(['order-detail/index']);
+                        // return $this->redirect(['order-detail/index']);
+                        return $this->redirect(['customer-receipt/print','order_detail_id' => $model->id]);
                     }
                     // else{
                     //     die('2');
@@ -148,6 +149,8 @@ class OrderDetailController extends Controller
         $taxes = ArrayHelper::map(Tax::find()->all(), "id","tax_percent");
         $sum = 0;
         $amount = 0;
+        $discount = 0;
+        $tax = 0;
         if($data = Yii::$app->request->post()) {
             $data = Yii::$app->request->post();
             foreach($data["arr"] as $key=>$value){
@@ -159,10 +162,9 @@ class OrderDetailController extends Controller
             // die;
             $amount = $sum;
             if($data["discount"]) {
-                $discount = $offers[$data["discount"]];
-                // echo "<pre>";print_r($offers);echo "</pre>";die;
-                // return $discount;
-                $amount= ($sum*(100-$discount))/100;
+                $discount = ($offers[$data["discount"]]*$sum)/100;
+                // $amount= ($sum*(100-$discount))/100;
+                $amount= $sum-$discount;
             }
             if($data["tax"]) {
                 $tax = ($taxes[$data["tax"]]*$amount)/100;
@@ -171,8 +173,12 @@ class OrderDetailController extends Controller
                 $amount= $amount+$tax;
             }
             
-
-            return json_encode(["amount"=>$amount,"sum"=>$sum]) ;
+            $amount = round($amount,2);
+            $sum = round($sum,2);
+            $discount = round($discount,2);
+            $tax = round($tax,2);
+            // die($amount.",".$discount.",".$tax);
+            return json_encode(["amount"=>$amount,"sum"=>$sum,"discount"=>$discount,"tax"=>$tax]) ;
         }
         else {
             return "data not sent";

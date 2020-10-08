@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use Yii;
 use app\models\CustomerReceipt;
+use app\models\OrderItem;
+use app\models\OrderDetail;
 use app\models\CustomerReceiptSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -75,10 +77,11 @@ class CustomerReceiptController extends Controller
         ]);
     }
 
-    public function actionPrint($print_id)
+    public function actionPrint($order_detail_id)
     {
         $model = new CustomerReceipt();
-
+        $orderItems = OrderItem::find()->asArray()->where(["order_detail_id"=>$order_detail_id])->all();
+        $orderDetails = OrderDetail::find()->asArray()->where(["id"=>$order_detail_id])->all();
         // if ($model->load(Yii::$app->request->post()) ) {
         //    // return $this->redirect(['view', 'id' => $model->id]);
         // }
@@ -86,7 +89,9 @@ class CustomerReceiptController extends Controller
 
         return $this->renderAjax('print', [
             'model' => $model,
-            'print_id'=>$print_id,
+            'order_detail_id'=>$order_detail_id,
+            'orderDetails'=>$orderDetails,
+            'orderItems'=>$orderItems
         ]);
     }
 

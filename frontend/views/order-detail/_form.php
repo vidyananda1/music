@@ -40,9 +40,11 @@ $dis= ArrayHelper::map(Offer::find()->all(), 'id', 'dis_name');
     <div class="row">
         <div class="col-md-3 col-xs-3">
             <?= $form->field($model, 'tax_id')->dropdownList($tax,['prompt'=>'Select Tax'])->label('Tax (if any)');  ?>
+            <?= $form->field($model, 'tax_amount')->hiddenInput()->label(false);  ?>
         </div>
          <div class="col-md-3 col-xs-3">
             <?= $form->field($model, 'discount')->dropdownList($dis,['prompt'=>'Select Discount'])->label('Discount (if any)');  ?>
+            <?= $form->field($model, 'discount_amount')->hiddenInput()->label(false);  ?>
         </div>
          <div class="col-md-3 col-xs-3">
             <?= $form->field($model, 'price')->textInput(['maxlength' => true])->label('Price Total') ?>
@@ -205,6 +207,8 @@ function requestSum(arr) {
     var discount =  $("#orderdetail-discount").val();
     const price =  $("#orderdetail-price");
     const amount =  $("#orderdetail-total");
+    const discount_amount =  $("#orderdetail-discount_amount");
+    const tax_amount =  $("#orderdetail-tax_amount");
     const url = "'.$url.'";
     if(tax=="")
         tax = 0 ;
@@ -221,6 +225,8 @@ function requestSum(arr) {
             // var obj = JSON.parse(data);
             amount.val(response["amount"]);
             price.val(response["sum"]);
+            discount_amount.val(response["discount"]);
+            tax_amount.val(response["tax"]);
         },
         error : function(request,error)
         {

@@ -3,9 +3,17 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\CustomerReceipt;
+use app\models\Items;
+use app\models\Tax;
+use app\models\Offer;
 
-$receipt = CustomerReceipt::find()->where(['order_detail_id'=>$print_id])->one();
-
+$receipt = CustomerReceipt::find()->where(['order_detail_id'=>$order_detail_id])->one();
+$itemNames = ArrayHelper::map(Items::find()->all(),"id","name");
+$itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
+$taxes = ArrayHelper::map(Tax::find()->all(),"id","name");
+$itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
+// echo "<pre>"; print_r($orderDetails);echo "</pre>";
+// echo "<pre>"; print_r($orderItems);echo "</pre>";
 
 ?>
 
@@ -30,27 +38,67 @@ $receipt = CustomerReceipt::find()->where(['order_detail_id'=>$print_id])->one()
         <td colspan='2'>Quantity</td>
         <td colspan='2'>Price</td>
       </tr>
+      <?php foreach($orderItems as $key => $value )  {?>
       <tr style="font-weight:bold;font-size:13px">
-        <td >Tandoori</td>
-        <td colspan='2' style="fond-width:bold;font-size:15px">3</td>
-        <td colspan='2' >Rs 500</td>
+        <td>
+          <?php if(isset($itemNames[$value["item_id"]])) {
+          echo $itemNames[$value["item_id"]];
+        }
+        ?>
+        </td>
+        <td colspan='2' style="font-weight:bold;font-size:15px"><?=$value["no_of_items"] ?></td>
+        <td colspan='2' >Rs <?php if(isset($itemPrices[$value["item_id"]])) {
+          echo $itemPrices[$value["item_id"]];
+        }
+        ?></td>
       </tr>
+      <?php } ?>
     </table>
     <table class="nobor" >
+    <tr style="font-weight:bold;font-size:13px">
+        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Sub Total</span></td>
+        <td colspan='2'>Rs 
+        <?php if(isset($orderDetails[0]["price"]))
+                echo $orderDetails[0]["price"];
+              else  
+                echo "0";
+
+         ?>
+        </td>
+      </tr>
     	<tr style="font-weight:bold;font-size:13px">
-        <td style="width:60%"></td>
-        <td colspan='2' style="font-width:bold;font-size:15px">Tax</td>
-        <td colspan='2'>Rs 50</td>
+        <!-- <td style="width:60%"></td> -->
+        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Tax</span></td>
+        <td colspan='2'>Rs 
+        <?php if(isset($orderDetails[0]["tax_amount"]))
+                echo $orderDetails[0]["tax_amount"];
+              else  
+                echo "0";
+
+         ?>
+        </td>
       </tr>
       <tr style="font-weight:bold;font-size:13px">
-        <td style="width:60%"></td>
-        <td colspan='2' style="font-width:bold;font-size:15px">Discount</td>
-        <td colspan='2' >Rs 0</td>
+        <!-- <td style="width:60%"></td> -->
+        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Discount</span></td>
+        <td colspan='2' >Rs 
+          <?php if(isset($orderDetails[0]["discount_amount"]))
+                echo $orderDetails[0]["discount_amount"];
+              else  
+                echo "0";
+
+         ?></td>
       </tr>
        <tr style="font-weight:bold;font-size:13px">
-        <td style="width:60%"></td>
-        <td colspan='2' style="font-width:bold;font-size:15px">Total Amount</td>
-        <td colspan='2' >Rs 550</td>
+        <!-- <td style="width:60%"></td> -->
+        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Total Amount</span></td>
+        <td colspan='2' >Rs 
+          <?php if(isset($orderDetails[0]["total"]))
+                echo $orderDetails[0]["total"];
+              else  
+                echo "0";
+
+         ?></td>
       </tr>
     </table>
 
@@ -105,6 +153,9 @@ hr {
 }
 .right {
   text-align: right;
+}
+.total {
+  margin-left: 300px;
 }
 </style>
 

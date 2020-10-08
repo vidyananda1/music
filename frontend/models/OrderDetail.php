@@ -28,6 +28,7 @@ class OrderDetail extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    
     public static function tableName()
     {
         return 'order_detail';
@@ -41,8 +42,8 @@ class OrderDetail extends \yii\db\ActiveRecord
         return [
             [['price', 'total', 'updated_by','customer_address','customer_phone'], 'required'],
             [['customer_address'], 'string'],
-            [['discount', 'tax_id', 'updated_by'], 'integer'],
-            [['price', 'total'], 'number'],
+            [['discount', 'tax_id', 'updated_by',], 'integer'],
+            [['price', 'total','discount_amount','tax_amount'], 'number'],
             [['customer_id','updated_date'], 'safe'],
             [['customer_name'], 'string', 'max' => 255],
             //[['customer_id'], 'string', 'max' => 200],
