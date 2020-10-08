@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\OrderItem;
+use app\models\OrderDetail;
 
 /**
  * OrderItemSearch represents the model behind the search form of `app\models\OrderItem`.
@@ -14,11 +15,13 @@ class OrderItemSearch extends OrderItem
     /**
      * {@inheritdoc}
      */
+    public $customer_id;
+    public $customer_name;
     public function rules()
     {
         return [
             [['id', 'order_detail_id', 'item_id','no_of_items', 'updated_by'], 'integer'],
-            [['updated_date', 'record_status'], 'safe'],
+            [['updated_date', 'record_status','customer_id','customer_name'], 'safe'],
         ];
     }
 
@@ -40,7 +43,8 @@ class OrderItemSearch extends OrderItem
      */
     public function search($params)
     {
-        $query = OrderItem::find();
+        $query = OrderItem::find()
+                ->leftjoin('order_detail','order_item.order_detail_id=order_detail.id');
 
         // add conditions that should always apply here
 
@@ -66,7 +70,9 @@ class OrderItemSearch extends OrderItem
             'updated_date' => $this->updated_date,
         ]);
 
-        $query->andFilterWhere(['like', 'record_status', $this->record_status]);
+        $query->andFilterWhere(['like', 'record_status', $this->record_status])
+              ->andFilterWhere(['like', 'order_detail.customer_id', $this->customer_id])
+              ->andFilterWhere(['like', 'order_detail.customer_name', $this->customer_name]);
 
         return $dataProvider;
     }

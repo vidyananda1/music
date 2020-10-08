@@ -1,10 +1,15 @@
 <?php
-use app\models\CarDetails;
-use app\models\DriverDetails;
-use app\models\Customer;
+use app\models\OrderDetail;
+use app\models\Items;
+use app\models\Employee;
 //use app\models\Counterno;
 
 $this->title = '';
+
+$emp = Employee::find()->where(['record_status'=>'1'])->count();
+$itm = Items::find()->where(['OR',['quantity'=>'FULL'],['quantity'=>'NONE']])->count();
+$cus = OrderDetail::find()->where(['record_status'=>'1'])->count();
+$sale = OrderDetail::find()->where(['record_status'=>'1'])->sum('total');
 
 ?>
 
@@ -29,12 +34,12 @@ $today = date('Y-m-d');
             <div class="inner">
               <h4 style="text-align:center;"><b>NO OF EMPLOYEES</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>17</b></h4></div>
+            <div><h4 style="text-align:center;"><b><?= $emp ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
             
-                <a href="index.php?r=car-details/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
+                <a href="index.php?r=employee/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
           </div>
     </div>
     <div class="col-lg-6 col-xs-6">
@@ -43,12 +48,12 @@ $today = date('Y-m-d');
             <div class="inner">
               <h4 style="text-align:center;"><b>NO OF ITEMS</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>55</b></h4></div>
+            <div><h4 style="text-align:center;"><b> <?= $itm ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-cutlery"></i>
             </div>
             
-                <a href="index.php?r=car-details/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
+                <a href="index.php?r=items/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
           </div>
     </div>
  </div>
@@ -60,12 +65,12 @@ $today = date('Y-m-d');
             <div class="inner">
               <h4 style="text-align:center;"><b>TOTAL CUSTOMERS</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>125</b></h4></div>
+            <div><h4 style="text-align:center;"><b><?= $cus ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-user-plus"></i>
             </div>
             
-                <a href="index.php?r=car-details/index" class="small-box-footer"> </a> 
+                <a  class="small-box-footer"> </a> 
           </div>
     </div>
     <div class="col-lg-6 col-xs-6">
@@ -74,12 +79,12 @@ $today = date('Y-m-d');
             <div class="inner">
               <h4 style="text-align:center;"><b>TOTAL SALES</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>Rs 150000</b></h4></div>
+            <div><h4 style="text-align:center;"><b>Rs <?= $sale ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-money"></i>
             </div>
             
-                <a href="index.php?r=car-details/index" class="small-box-footer"> </a> 
+                <a  class="small-box-footer"> </a> 
           </div>
     </div>
  </div>

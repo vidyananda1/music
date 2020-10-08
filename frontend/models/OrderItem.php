@@ -55,4 +55,10 @@ class OrderItem extends \yii\db\ActiveRecord
             'record_status' => 'Record Status',
         ];
     }
+
+    public function getCus()
+        {
+            return $this->hasOne(OrderDetail::className(), ['id' => 'order_detail_id']);
+        }
+
 }
