@@ -10,9 +10,10 @@ use yii\grid\GridView;
 $this->title = 'Employees';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<br><br>
 <div class="employee-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    
 
     <p>
         <?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success openModal ','size'=>'lg', 'header'=>'Create Employee']) ?>
@@ -26,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'employee_name',
             'address:ntext',
             'phone',
-            'user_id',
+            //'user_id',
             //'created_by',
             //'created_date',
             //'updated_by',
