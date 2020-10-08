@@ -40,6 +40,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'created_date',
 
+            [
+                'attribute'=>'created_date',
+                   'value' => function ($model){
+                        return date('d-m-Y',strtotime($model->created_date));
+                
+                    },
+                        'label'=>'Date',
+                        'filter'=>'',
+            ],
+
             //['class' => 'yii\grid\ActionColumn'],
             [
             'value' => function ($model) {
