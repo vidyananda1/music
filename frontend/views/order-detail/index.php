@@ -26,10 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
 
     $gridColumns = [
-                    'customer_name',
+                    'customer_name_id',
                     'customer_id',
-                    'customer_address:ntext',
                     'customer_phone',
+                    'table_id',
                     'price',
                     'discount',
                     //'tax_id',
@@ -67,9 +67,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'customer_name',
+            'customer_name_id',
             'customer_id',
-            'customer_address:ntext',
+            
             'customer_phone',
             
             [

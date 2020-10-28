@@ -40,12 +40,12 @@ class OrderDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['price', 'total', 'updated_by','customer_address','customer_phone'], 'required'],
-            [['customer_address'], 'string'],
+            [['price', 'total', 'updated_by','customer_phone'], 'required'],
+            
             [['discount', 'tax_id', 'updated_by',], 'integer'],
             [['price', 'total','discount_amount','tax_amount'], 'number'],
-            [['customer_id','updated_date'], 'safe'],
-            [['customer_name'], 'string', 'max' => 255],
+            [['customer_id','updated_date','customer_name_id','table_id'], 'safe'],
+           // [['customer_name'], 'string', 'max' => 255],
             //[['customer_id'], 'string', 'max' => 200],
             [['customer_phone'], 'string', 'max' => 10],
             [['record_status'], 'string', 'max' => 1],
@@ -59,10 +59,10 @@ class OrderDetail extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'customer_name' => 'Customer Name',
+            'customer_name_id' => 'Customer Name',
             'customer_id' => 'Customer ID',
-            'customer_address' => 'Customer Address',
             'customer_phone' => 'Customer Phone',
+            'table_id'=>'Table',
             'price' => 'Price',
             'discount' => 'Discount',
             'tax_id' => 'Tax ID',

@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\OrderDetail;
+use app\models\Customer;
 
 /**
- * OrderDetailSearch represents the model behind the search form of `app\models\OrderDetail`.
+ * CustomerSearch represents the model behind the search form of `app\models\Customer`.
  */
-class OrderDetailSearch extends OrderDetail
+class CustomerSearch extends Customer
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,8 @@ class OrderDetailSearch extends OrderDetail
     public function rules()
     {
         return [
-            [['id','discount', 'tax_id', 'updated_by'], 'integer'],
-            [['customer_name_id', 'customer_id', 'customer_phone', 'updated_date', 'record_status','table_id'], 'safe'],
-            [['price', 'total'], 'number'],
+            [['id', 'created_by'], 'integer'],
+            [['cus_name', 'address', 'phone', 'created_date', 'record_status'], 'safe'],
         ];
     }
 
@@ -41,13 +40,12 @@ class OrderDetailSearch extends OrderDetail
      */
     public function search($params)
     {
-        $query = OrderDetail::find();
+        $query = Customer::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $this->load($params);
@@ -61,18 +59,13 @@ class OrderDetailSearch extends OrderDetail
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'price' => $this->price,
-            'discount' => $this->discount,
-            'tax_id' => $this->tax_id,
-            'total' => $this->total,
-            'updated_by' => $this->updated_by,
-            'updated_date' => $this->updated_date,
+            'created_by' => $this->created_by,
+            'created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'customer_name_id', $this->customer_name_id])
-            ->andFilterWhere(['like', 'customer_id', $this->customer_id])
-            ->andFilterWhere(['like', 'table_id', $this->table_id])
-            ->andFilterWhere(['like', 'customer_phone', $this->customer_phone])
+        $query->andFilterWhere(['like', 'cus_name', $this->cus_name])
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'record_status', $this->record_status]);
 
         return $dataProvider;

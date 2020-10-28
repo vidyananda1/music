@@ -15,9 +15,11 @@
     $items = [
         ['label' => 'Home','icon' => 'home', 'url' => ['/site/index']],
         // ['label' => 'Gii', 'url' => ['/gii']],
-        ['label' => 'ORDER DETAILS', 'url' => ['/order-detail']],
-        ['label' => 'ORDER ITEMS', 'url' => ['/order-item']],
-        ['label' => 'RECEIPT', 'url' => ['/customer-receipt']],
+        ['label' => 'CUSTOMERS','icon' => 'user', 'url' => ['/customer']],
+        ['label' => 'ORDER DETAILS','icon' => 'shopping-cart', 'url' => ['/order-detail']],
+        ['label' => 'ORDER ITEMS','icon' => 'gift', 'url' => ['/order-item']],
+        ['label' => 'RECEIPT', 'icon' => 'list-alt','url' => ['/customer-receipt']],
+        ['label' => 'STOCK IN', 'icon' => 'folder-open', 'url' => ['/stock-in']],
      ];
      if($display!="hide") {
          array_push($items,[
@@ -30,11 +32,12 @@
                 ['label' => 'TAX', 'url' => ['/tax']],
                 ['label' => 'OFFER', 'url' => ['/offer']],
                 ['label' => 'EMPLOYEES', 'url' => ['/employee']],
+                ['label' => 'TABLES', 'url' => ['/dinning-table']],
             ],
         ]);
      }
 ?>
-<aside class="main-sidebar" style="background-color:#effaed">
+<aside class="main-sidebar" >
 
     <section class="sidebar">
 

@@ -6,11 +6,12 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Items;
 use app\models\Category;
+use app\models\Customer;
 use app\models\Offer;
 use app\models\Tax;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
-
+use app\models\DinningTable;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\OrderDetail */
@@ -19,24 +20,35 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
 $cat= ArrayHelper::map(Category::find()->all(), 'id', 'cat_name');
 $tax= ArrayHelper::map(Tax::find()->all(), 'id', 'tax_name');
 $dis= ArrayHelper::map(Offer::find()->all(), 'id', 'dis_name');
+$cus= ArrayHelper::map(Customer::find()->all(), 'id', 'cus_name');
+$table= ArrayHelper::map(DinningTable::find()->all(), 'id', 'table_name');
 ?>
 
 <div class="order-detail-form">
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
     <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true]) ?>
+        <div class="col-md-4 col-xs-4">
+           
+            <?= $form->field($model, 'customer_name_id')->widget(Select2::classname(), [
+                'data' => $cus,
+                'language' => 'de',
+                'options' => ['placeholder' => '------- Select Customer -------'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label('Customer'); 
+
+            ?>
         </div>
-         <div class="col-md-12 col-xs-12">
+         <div class="col-md-4 col-xs-4">
             <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true]) ?>
         </div>
-    </div>
-    <div class="row">
-         <div class="col-md-12 col-xs-12">
-            <?= $form->field($model, 'customer_address')->textarea(['rows' => 6]) ?>
+         <div class="col-md-4 col-xs-4">
+            <?= $form->field($model, 'table_id')->dropdownList($table,['prompt'=>'------- Select Table -------'])->label('Table'); ?>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-md-3 col-xs-3">
             <?= $form->field($model, 'tax_id')->dropdownList($tax,['prompt'=>'Select Tax'])->label('Tax (if any)');  ?>
@@ -120,6 +132,7 @@ $dis= ArrayHelper::map(Offer::find()->all(), 'id', 'dis_name');
 </div>
 <?php
 $url = Url::to(["amount"]);
+$ph = Url::to(["phone"]);
 $this->registerJs('
 $(".select").select2();
 $(".dynamicform_wrapper").on("beforeInsert", function(e, item) {
@@ -147,6 +160,20 @@ $(".dynamicform_wrapper").on("afterDelete", function(e) {
 $(".dynamicform_wrapper").on("limitReached", function (e, item) {
     alert("Limit reached");
 });
+
+$(document).on("change", "#orderdetail-customer_name_id",   function () {
+    var cus = $("#orderdetail-customer_name_id").val();
+    var url = "'.$ph.'";
+    $.post(url+"&id="+cus, function(data) {
+                if(!data)
+                {
+                  alert("Mobile no. is not registered for this Customer");
+                } 
+                else{
+                   $("#orderdetail-customer_phone").val(data); 
+                }
+            });
+  });
 
 $(document).on("change", ".no_item",   function main() {
   getData();

@@ -15,6 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Model;
 use yii\helpers\ArrayHelper;
+use app\models\Customer;
 
 /**
  * OrderDetailController implements the CRUD actions for OrderDetail model.
@@ -49,6 +50,17 @@ class OrderDetailController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+     public function actionPhone($id)
+    {
+        $customer = Customer::find()->where(['id'=>$id])->one();
+        $phone = $customer->phone;
+        if($phone){
+            return $phone;
+        }else{
+            return 0;
+        }
     }
 
     /**

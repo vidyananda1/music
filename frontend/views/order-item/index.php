@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Items;
+use app\models\Category;
 use app\models\OrderDetail;
 use yii\helpers\ArrayHelper;
 use kartik\export\ExportMenu;
@@ -126,19 +127,43 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
                 'label' =>'Customer Name',
                 
              ],
-            //'item_id',
-            // [
-            //     'attribute'=>'item_id',
-            //     'value' => function ($model){
-            //       $itm = Items::find()->where(['id'=>$model->item_id])->one();
-            //        return isset($itm) ? $itm->name : ' ';
+              [
+                //'attribute'=>'item_id',
+                'value' => function ($model){
+                  $ord = OrderDetail::find()->where(['id'=>$model->order_detail_id])->one();
+                  $cus_name = Customer::find()->where(['id'=>$ord->customer_name_id])->one();
+                   return isset($cus_name) ? $cus_name->cus_name : ' ';
             
-            //             },
-            //             'format' => 'raw',
-            //             'label' =>'Items',
-            //             'filter' => '',
-            // ],
+                        },
+                        'format' => 'raw',
+                        'label' =>'Customer',
+                        'filter' => '',
+            ],
+            //'item_id',
+            [
+                'attribute'=>'item_id',
+                'value' => function ($model){
+                  $itm = Items::find()->where(['id'=>$model->item_id])->one();
+                   return isset($itm) ? $itm->name : ' ';
+            
+                        },
+                        'format' => 'raw',
+                        'label' =>'Items',
+                        'filter' => '',
+            ],
             //'category_id',
+            [
+                'attribute'=>'item_id',
+                'value' => function ($model){
+                  $itm = Items::find()->where(['id'=>$model->item_id])->one();
+                  $cat = Category::find()->where(['id'=>$itm->category])->one();
+                   return isset($cat) ? $cat->cat_name : ' ';
+            
+                        },
+                        'format' => 'raw',
+                        'label' =>'Category',
+                        'filter' => '',
+            ],
             [
                 'attribute'=> 'no_of_items',
                 'filter'=>''

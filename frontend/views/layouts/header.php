@@ -12,8 +12,8 @@ date_default_timezone_set('Asia/Kolkata');
 
 <?= Html::csrfMetaTags() ?>
 
-     <?= Html::a('<span class="logo-mini">ED</span><span class="logo-lg">N CAFE</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
-
+    
+     <?= Html::a('<span class="logo-mini">ED</span><span class="logo-lg">DEMO</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
     <nav class="navbar navbar-static-top " role="navigation" >
 
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -32,7 +32,7 @@ date_default_timezone_set('Asia/Kolkata');
                 <?php }else{ ?>
 
                 <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="background-color:#12964e">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
                        
                         <span class="hidden-xs glyphicon glyphicon-user"> <?= strtoupper(Yii::$app->user->identity->username)?></span>
                     </a>
