@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\StockIn */
@@ -11,14 +12,40 @@ use yii\widgets\ActiveForm;
 <div class="stock-in-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+    	<div class="col-md-6 col-xs-6">
+    		<?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?>
+    	</div>
+    	<div class="col-md-6 col-xs-6">
+    		<?= $form->field($model, 'no_of_item')->textInput() ?>
+    	</div>
+    	
+    </div>
+     <div class="row">
+    	<div class="col-md-6 col-xs-6">
+    		 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+    	</div>
+    	<div class="col-md-6 col-xs-6">
+    		<?= $form->field($model, 'date')->widget(
+                            DatePicker::className(), [
+                                // inline too, not bad
+                                 'inline' => false, 
+                                 
+                                 'options' => ['placeholder' => '----Date----','class'=> 'date'],
 
-    <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?>
+                                 // modify template for custom rendering
+                                //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                                'clientOptions' => [
+                                    'autoclose' => true,
+                                    'todayHighlight' => true,
+                                    'format' => 'dd-mm-yy',     
 
-    <?= $form->field($model, 'no_of_item')->textInput() ?>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'date')->textInput() ?>
+                                ]
+                        ])->label('Select Date');?>
+    	</div>
+    	
+    </div>
 
     <div class="form-group text-center">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

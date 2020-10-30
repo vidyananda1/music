@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\OrderDetail;
+use app\models\Customer;
 
 
 /* @var $this yii\web\View */
@@ -30,8 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=> 'customer_id',
                 'value' => function ($model){
-                  $name = OrderDetail::find()->where(['customer_id'=>$model->customer_id])->one();
-                   return isset($name) ? $name->customer_name : ' ';
+                  $cus_id = OrderDetail::find()->where(['customer_id'=>$model->customer_id])->one();
+                  $name = Customer::find()->where(['id'=>$cus_id->customer_name_id])->one();
+                   return isset($name) ? $name->cus_name : ' ';
             
                         },
                         'format' => 'raw',

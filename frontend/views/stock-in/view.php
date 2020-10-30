@@ -6,14 +6,14 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\StockIn */
 
-$this->title = $model->id;
+// $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Stock Ins', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="stock-in-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -25,18 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+   <p style="float:right">
+        <?= Html::a('Back ❯', ['index',], ['class' => 'btn btn-success ']) ?>
+    </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'item_name',
             'no_of_item',
             'price',
             'date',
-            'created_by',
-            'created_date',
-            'record_status',
+            // 'created_by',
+            // 'created_date',
+            // 'record_status',
         ],
     ]) ?>
 

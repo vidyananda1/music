@@ -67,7 +67,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'customer_name_id',
+            //'customer_name_id',
+             [
+                'attribute' =>'customer_name_id',
+                'value' => function($model){
+                    return $model->customer->cus_name;
+                },
+                'label' =>'Customer Name',
+                
+            ],
             'customer_id',
             
             'customer_phone',

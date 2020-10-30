@@ -72,4 +72,8 @@ class OrderDetail extends \yii\db\ActiveRecord
             'record_status' => 'Record Status',
         ];
     }
+    public function getCustomer()
+        {
+            return $this->hasOne(Customer::className(), ['id' => 'customer_name_id']);
+        }
 }

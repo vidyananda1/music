@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\StockInSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Stock In';
+$this->title = 'Expenses';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <br><br>
@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_date',
             //'record_status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template'=>'{update} {delete}'],
         ],
     ]); ?>
 
