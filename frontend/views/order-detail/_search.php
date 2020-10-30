@@ -29,6 +29,7 @@ use yii\widgets\ActiveForm;
             <div class="form-group">
                 <?= Html::submitButton('Search', ['class' => 'btn btn-primary ']) ?>
                 <!-- <?//= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?> -->
+                <?= Html::a('Reset', ['index'], ['class' => 'btn btn-success ','size'=>'lg', 'header'=>'Order Update']) ?>
             </div>
         
         </div>
