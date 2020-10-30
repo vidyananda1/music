@@ -17,7 +17,7 @@
         // ['label' => 'Gii', 'url' => ['/gii']],
         ['label' => 'CUSTOMERS','icon' => 'user', 'url' => ['/customer']],
         ['label' => 'ORDER DETAILS','icon' => 'shopping-cart', 'url' => ['/order-detail']],
-        ['label' => 'ORDER ITEMS','icon' => 'gift', 'url' => ['/order-item']],
+        ['label' => 'ITEMS ORDERED','icon' => 'gift', 'url' => ['/order-item']],
         ['label' => 'RECEIPT', 'icon' => 'list-alt','url' => ['/customer-receipt']],
         ['label' => 'EXPENSES', 'icon' => 'folder-open', 'url' => ['/stock-in']],
      ];

@@ -127,6 +127,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'record_status',
 
             //['class' => 'yii\grid\ActionColumn'],
+            [
+            'value' => function ($model) {
+              return Html::a('Update', ['order-detail/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-success openModal','size'=>'lg', 'header'=>'Update Your Order Here']);  
+                        },
+                        'format' => 'raw',
+                    ],
         ],
     ]); ?>
 
