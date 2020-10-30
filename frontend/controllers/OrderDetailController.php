@@ -222,13 +222,53 @@ class OrderDetailController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelitem = [new OrderItem()];
+        //$taxes = ArrayHelper::map(Tax::find()->all(), "id","tax_percent");
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $modelitem = Model::createMultiple(OrderItem::classname());
+            Model::loadMultiple($modelitem, Yii::$app->request->post());
+
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($modelitem as $sta) {
+                            $sta->order_detail_id = $model->id;
+                            $sta->updated_by = 1;//Yii::$app->user->id;
+                            if (! ($flag = $sta->save(false))) {
+                                //die('4');
+                                $transaction->rollBack();
+                                Yii::$app->session->setFlash('danger', 'Failed to Update!');
+                                return $this->redirect(['order-detail/index']);
+                                //break;
+                            }
+                        }
+
+
+                       
+                     if ($flag) {
+                         //die('3');
+                         //To do: add custromer Id (random number CUS1234),add recipt number(rand NK1234)  add to customer receipt table
+                        $transaction->commit();
+                        Yii::$app->session->setFlash('success', 'Successully Updated!');
+                         return $this->redirect(['order-detail/index']);
+                        //return $this->redirect(['customer-receipt/print','order_detail_id' => $model->id,'target'=>'_blank']);
+                    }
+                    // else{
+                    //     die('2');
+                    // }
+             }  
+                } catch (Exception $e) {
+                    //die('1');
+                    $transaction->rollBack();
+                }
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update_form', [
             'model' => $model,
+            'modelitem'=> $modelitem,
         ]);
     }
 
