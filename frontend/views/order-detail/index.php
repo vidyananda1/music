@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Update Order Detail', ['create'], ['class' => 'btn btn-success openModal','size'=>'lg', 'header'=>'Order Update']) ?>
     </p>
 
-    <?php  echo $this->render('_search', ['model' => $searchModel]); 
+    <?php  echo $this->render('_search', ['model' => $searchModel,'sum' => $sum,'search'=>$search]); 
 
     $gridColumns = [
                     'customer_name_id',

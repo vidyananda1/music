@@ -45,11 +45,23 @@ class OrderDetailController extends Controller
     {
         $searchModel = new OrderDetailSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $count = $dataProvider->query->count();
+        $newDataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        // $count = $dataProvider->query->count();
+        // $dataProvider->query->where(['customer_phone'=>$searchModel->search]);
+        $sum = 0;
+        $search ='';
+        if(isset(Yii::$app->request->queryParams['OrderDetailSearch']['search'])) {
+            $search = Yii::$app->request->queryParams['OrderDetailSearch']['search'];
+            if($search) {
+                $sum = OrderDetail::find()->leftJoin('customer','order_detail.customer_name_id=customer.id')->where(['or',['customer_phone'=>$search],['cus_name'=>$search]])->sum('total');
+            }
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'count' => $count
+             'sum' => $sum,
+            'search' => $search
+
         ]);
     }
 

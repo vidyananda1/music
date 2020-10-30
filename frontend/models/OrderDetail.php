@@ -28,7 +28,7 @@ class OrderDetail extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    
+    public $search;
     public static function tableName()
     {
         return 'order_detail';
@@ -49,6 +49,7 @@ class OrderDetail extends \yii\db\ActiveRecord
             //[['customer_id'], 'string', 'max' => 200],
             [['customer_phone'], 'string', 'max' => 10],
             [['record_status'], 'string', 'max' => 1],
+            [['search'],'string']
         ];
     }
 
@@ -70,6 +71,7 @@ class OrderDetail extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
             'updated_date' => 'Updated Date',
             'record_status' => 'Record Status',
+            'search' => 'Search by Customer name/number'
         ];
     }
     public function getCustomer()

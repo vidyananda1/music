@@ -51,7 +51,7 @@ class OrderDetailSearch extends OrderDetail
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
+            // 'sort'=> ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $this->load($params);
@@ -72,7 +72,7 @@ class OrderDetailSearch extends OrderDetail
             'updated_by' => $this->updated_by,
             'updated_date' => $this->updated_date,
         ]);
-
+        // $query->select("select");
         $query->andFilterWhere(['like', 'customer_id', $this->customer_id])
             ->andFilterWhere(['like', 'table_id', $this->table_id])
             ->andFilterWhere(['like', 'customer_phone', $this->customer_phone])

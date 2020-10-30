@@ -1,5 +1,6 @@
 <?php
 
+use Mpdf\Tag\Option;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -17,36 +18,36 @@ use yii\widgets\ActiveForm;
 
    <div class="row">
         <div class="col-md-4">
-            <?= $form->field($model, 'customer_id') ?>
+            <?= $form->field($model, 'search')->textInput(['placeholder'=>'Search by customer name/number'])->label(false) ?>
         </div>
    
 
-    <?php // echo $form->field($model, 'item_id') ?>
+   
 
-    <?php // echo $form->field($model, 'category_id') ?>
-
-    <?php // echo $form->field($model, 'no_of_items') ?>
-
-    <?php // echo $form->field($model, 'price') ?>
-
-    <?php // echo $form->field($model, 'discount') ?>
-
-    <?php // echo $form->field($model, 'tax_id') ?>
-
-    <?php // echo $form->field($model, 'total') ?>
-
-    <?php // echo $form->field($model, 'updated_by') ?>
-
-    <?php // echo $form->field($model, 'updated_date') ?>
-
-    <?php // echo $form->field($model, 'record_status') ?>
-    <div class="col-md-4">
-        <div class="form-group">
-            <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-            <!-- <?//= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?> -->
+        <?php // echo $form->field($model, 'record_status') ?>
+        <div class="col-md-4">
+            <div class="form-group">
+                <?= Html::submitButton('Search', ['class' => 'btn btn-primary ']) ?>
+                <!-- <?//= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?> -->
+            </div>
+        
         </div>
-    </div>
 
-    <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
 
     </div>
+    <div class="row">
+    <?php if($sum) {?>
+            <label class="lblSum">This customer has a total purchase of Rs.<?= $sum ?></label>
+        <?php } else if($search) {?>
+            <label class="lblSum">There is no customer with the give phone number/name.</label>
+        <?php } ?>
+    </div>
+<style>
+    .btn-search{
+        margin-top: 23px;
+    }
+    .lblSum {
+        margin-left:20px ;
+    }
+</style>
