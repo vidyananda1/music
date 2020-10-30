@@ -17,8 +17,8 @@ class StockInSearch extends StockIn
     public function rules()
     {
         return [
-            [['id', 'no_of_item', 'created_by'], 'integer'],
-            [['item_name', 'date', 'created_date', 'record_status'], 'safe'],
+            [['id',  'created_by'], 'integer'],
+            [['item_name','no_of_item', 'date', 'created_date', 'record_status'], 'safe'],
             [['price'], 'number'],
         ];
     }

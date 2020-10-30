@@ -7,7 +7,7 @@ use app\models\Category;
 use app\models\OrderDetail;
 use yii\helpers\ArrayHelper;
 use kartik\export\ExportMenu;
-
+use app\models\Customer;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrderItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,17 +26,17 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
 
     <?php //echo $this->render('_search', ['model' => $searchModel]);
          $gridColumns = [
-                             [
-                'attribute'=>'order_detail_id',
-                'value' => function ($model){
-                  $ord = OrderDetail::find()->where(['id'=>$model->order_detail_id])->one();
-                   return isset($ord) ? $ord->customer_id : ' ';
+            //                  [
+            //     'attribute'=>'order_detail_id',
+            //     'value' => function ($model){
+            //       $ord = OrderDetail::find()->where(['id'=>$model->order_detail_id])->one();
+            //        return isset($ord) ? $ord->customer_id : ' ';
             
-                        },
-                        'format' => 'raw',
-                        'label' =>'Customer ID',
-                        'filter' => '',
-            ],
+            //             },
+            //             'format' => 'raw',
+            //             'label' =>'Customer ID',
+            //             'filter' => '',
+            // ],
             [
                 'attribute'=>'order_detail_id',
                 'value' => function ($model){
@@ -85,7 +85,7 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             //'order_detail_id',
@@ -119,14 +119,14 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
             //             'label' =>'Customer Name',
             //             // 'filter' => '',
             // ],
-             [
-                'attribute' =>'customer_name',
-                'value' => function($model){
-                    return $model->cus->customer_name;
-                },
-                'label' =>'Customer Name',
+             // [
+             //    'attribute' =>'customer_name',
+             //    'value' => function($model){
+             //        return $model->cus->customer_name;
+             //    },
+             //    'label' =>'Customer Name',
                 
-             ],
+             // ],
               [
                 //'attribute'=>'item_id',
                 'value' => function ($model){

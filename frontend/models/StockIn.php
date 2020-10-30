@@ -33,10 +33,10 @@ class StockIn extends \yii\db\ActiveRecord
     {
         return [
             [['item_name', 'no_of_item', 'price', 'date', 'created_by'], 'required'],
-            [['no_of_item', 'created_by'], 'integer'],
+            [[ 'created_by'], 'integer'],
             [['price'], 'number'],
             [['date', 'created_date'], 'safe'],
-            [['item_name'], 'string', 'max' => 255],
+            [['no_of_item','item_name'], 'string', 'max' => 255],
             [['record_status'], 'string', 'max' => 1],
         ];
     }
