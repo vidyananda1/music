@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Update Order Detail', ['create'], ['class' => 'btn btn-success openModal','size'=>'lg', 'header'=>'Order Update']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    <?php  echo $this->render('_search', ['model' => $searchModel]); 
 
     $gridColumns = [
                     'customer_name_id',
@@ -125,3 +125,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 </div>
+<!-- <?//= $count?"dataProvider":"No customer found" ?> -->

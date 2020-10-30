@@ -15,15 +15,11 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'customer_name') ?>
-
-    <?= $form->field($model, 'customer_id') ?>
-
-    <?= $form->field($model, 'customer_address') ?>
-
-    <?= $form->field($model, 'customer_phone') ?>
+   <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'customer_id') ?>
+        </div>
+   
 
     <?php // echo $form->field($model, 'item_id') ?>
 
@@ -44,12 +40,13 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'updated_date') ?>
 
     <?php // echo $form->field($model, 'record_status') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="col-md-4">
+        <div class="form-group">
+            <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+            <!-- <?//= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?> -->
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-</div>
+    </div>

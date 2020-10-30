@@ -45,10 +45,11 @@ class OrderDetailController extends Controller
     {
         $searchModel = new OrderDetailSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $count = $dataProvider->query->count();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'count' => $count
         ]);
     }
 
