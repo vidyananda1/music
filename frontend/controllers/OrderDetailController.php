@@ -54,6 +54,7 @@ class OrderDetailController extends Controller
             $search = Yii::$app->request->queryParams['OrderDetailSearch']['search'];
             if($search) {
                 $sum = OrderDetail::find()->leftJoin('customer','order_detail.customer_name_id=customer.id')->where(['or',['customer_phone'=>$search],['cus_name'=>$search]])->sum('total');
+                $dataProvider->query->andFilterWhere(['or',['customer_phone'=>$search],['cus_name'=>$search]]);
             }
         }
         return $this->render('index', [
