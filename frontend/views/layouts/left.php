@@ -20,6 +20,7 @@
         ['label' => 'ITEMS ORDERED','icon' => 'gift', 'url' => ['/order-item']],
         ['label' => 'RECEIPT', 'icon' => 'list-alt','url' => ['/customer-receipt']],
         ['label' => 'EXPENSES', 'icon' => 'folder-open', 'url' => ['/stock-in']],
+        ['label' => 'REPORTS', 'icon' => 'folder-open', 'url' => ['/report']],
      ];
      if($display!="hide") {
          array_push($items,[
