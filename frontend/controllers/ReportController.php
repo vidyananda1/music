@@ -2,17 +2,20 @@
 
 namespace frontend\controllers;
 
-use Yii;
+use app\models\OrderDetail;
 use app\models\StockIn;
-use app\models\StockInSearch;
+use app\models\Report;
+use Yii;
+use app\models\Tax;
+use app\models\TaxSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StockInController implements the CRUD actions for StockIn model.
+ * TaxController implements the CRUD actions for Tax model.
  */
-class StockInController extends Controller
+class ReportController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,23 +33,40 @@ class StockInController extends Controller
     }
 
     /**
-     * Lists all StockIn models.
+     * Lists all Tax models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StockInSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andFilterWhere(['record_status'=>'1']);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+     
+        $model = new Report();
+       
+        $startDate = '';
+        $endDate = '';
+        if($model->load(Yii::$app->request->queryParams)) {
+            $startDate = $model->start_date;
+            $endDate  = $model->end_date;
+            $incomes = OrderDetail::find()->leftJoin('customer','customer.id=order_detail.customer_name_id')->select('order_detail.updated_date,total,cus_name')->asArray()->where(['between','date(order_detail.updated_date)',$startDate,$endDate])->groupBy('order_detail.updated_date,customer_name_id')->all();
+            $sumIncome = OrderDetail::find()->select('SUM(total) as total')->asArray()->where(['between','date(updated_date)',$startDate,$endDate])->all();
+            $epenses = StockIn::find()->select('item_name,price,date')->where(['between','date(date)',$startDate,$endDate])->andWhere(['record_status'=>1])->all();
+            $sumExpenses = StockIn::find()->select('SUM(price) as total')->asArray()->where(['between','date(date)',$startDate,$endDate])->andWhere(['record_status'=>1])->all();
+            // print_r($sumIncome[0]['total']);die;
+            return $this->render('index', [
+                // 'searchModel' => $searchModel,
+                // 'dataProvider' => $dataProvider,
+                'incomes' => $incomes,
+                'expenses'=>$epenses,
+                'sumIncome' => $sumIncome[0]['total'],
+                'sumExpenses' => $sumExpenses[0]['total'],
+                'model' => $model,
+            ]);
+        }
+        return $this->render('_form',['model'=>$model]);
+       
     }
 
     /**
-     * Displays a single StockIn model.
+     * Displays a single Tax model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,24 +79,23 @@ class StockInController extends Controller
     }
 
     /**
-     * Creates a new StockIn model.
+     * Creates a new Tax model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new StockIn();
+        $model = new Tax();
 
-       if ($model->load(Yii::$app->request->post()) ) {
-            $model->item_name = strtoupper($model->item_name);
+         if ($model->load(Yii::$app->request->post()) ) {
+            $model->tax_name = strtoupper($model->tax_name);
             $model->created_by = 1;//Yii::$app->user->id;
-            $model->date = date('Y-m-d',strtotime($model->date));
             if(!$model->save()){
                 print_r($model->errors);die;
-                Yii::$app->session->setFlash('danger', 'Failed to Add Items!');
+                Yii::$app->session->setFlash('danger', 'Failed to Add Tax!');
                 return $this->redirect(Yii::$app->request->referrer);
             }else{
-                Yii::$app->session->setFlash('success', 'Items Successfully Added!');
+                Yii::$app->session->setFlash('success', 'Tax Successfully Added!');
                 return $this->redirect(['index']);
             }
         }
@@ -87,7 +106,7 @@ class StockInController extends Controller
     }
 
     /**
-     * Updates an existing StockIn model.
+     * Updates an existing Tax model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -107,32 +126,31 @@ class StockInController extends Controller
     }
 
     /**
-     * Deletes an existing StockIn model.
+     * Deletes an existing Tax model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-     public function actionDelete($id)
+    public function actionDelete($id)
     {
-        $model=$this->findModel($id);
-        $model->record_status='0';
-        $model->save();
-
+       $model = $this->findModel($id);
+       $model->record_status='0';
+       $model->save();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the StockIn model based on its primary key value.
+     * Finds the Tax model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return StockIn the loaded model
+     * @return Tax the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = StockIn::findOne($id)) !== null) {
+        if (($model = Tax::findOne($id)) !== null) {
             return $model;
         }
 
