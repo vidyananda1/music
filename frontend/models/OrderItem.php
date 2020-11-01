@@ -35,7 +35,7 @@ class OrderItem extends \yii\db\ActiveRecord
         return [
             [['order_detail_id', 'item_id','no_of_items', 'updated_by'], 'required'],
             [['order_detail_id', 'item_id','no_of_items', 'updated_by'], 'integer'],
-            [[ 'item_price','updated_date'], 'safe'],
+            [[ 'item_price','updated_date','status'], 'safe'],
             [['record_status'], 'string', 'max' => 1],
         ];
     }

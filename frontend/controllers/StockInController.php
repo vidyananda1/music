@@ -97,11 +97,13 @@ class StockInController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->item_name=strtoupper($model->item_name);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->render('edit', [
             'model' => $model,
         ]);
     }

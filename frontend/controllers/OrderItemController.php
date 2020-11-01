@@ -44,6 +44,28 @@ class OrderItemController extends Controller
         ]);
     }
 
+    public function actionApproval($id)
+    {
+        $model = OrderItem::find()->where(['id'=>$id])->one();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if(!$model->save()){
+                Yii::$app->session->setFlash('danger', 'Failed To Set Approval');
+            }else{
+
+               Yii::$app->session->setFlash('success', 'Approval Successfully Set !');
+                return $this->redirect(['index', 'id' =>$id]);
+
+
+        }    
+        }
+
+        return $this->renderAjax('approval', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Displays a single OrderItem model.
      * @param integer $id

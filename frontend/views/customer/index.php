@@ -36,8 +36,23 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_date',
             //'record_status',
 
-            ['class' => 'yii\grid\ActionColumn',
-                'template'=>'{update} {delete}',],
+            // ['class' => 'yii\grid\ActionColumn',
+            //     'template'=>'{update} {delete}',],
+             [
+            'value' => function ($model) {
+              return Html::a('Update', ['customer/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-success ']);  
+                        },
+                        'format' => 'raw',
+                    ],
+
+            //['class' => 'yii\grid\ActionColumn','template' => '{update}{delete}',],
+
+           [
+            'value' => function ($model) {
+              return Html::a('Delete', ['customer/delete', 'id' => $model->id], ['class' => 'btn btn-sm btn-danger ','data-method'=>'post', 'data-confirm'=>'ARE YOU SURE TO DELETE ?']);  
+                        },
+                        'format' => 'raw',
+                    ],
         ],
     ]); ?>
 

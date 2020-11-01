@@ -61,7 +61,12 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
                         'filter' => $item,
             ],
             //'category_id',
-            'no_of_items',
+            //'no_of_items',
+            [
+                'attribute'=>'no_of_items',
+                'label'=>'Quantity',
+
+            ],
             //'item_price',
             //'updated_by',
             //'updated_date',
@@ -166,6 +171,12 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
             ],
             [
                 'attribute'=> 'no_of_items',
+                'label'=>'Quantity',
+                'filter'=>''
+            ],
+            [
+                'attribute'=> 'status',
+                //'label'=>'Quantity',
                 'filter'=>''
             ],
 
@@ -185,6 +196,42 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
             //'record_status',
 
             // ['class' => 'yii\grid\ActionColumn'],
+
+             [
+                             // 'attribute' => 'approval',
+                            'label' =>'Approval',
+                            'format' => 'raw',
+                            'value' => function ($model)
+                             {
+                                //$apply= ApplyStatus::find()->where(['apply_id'=>$model->id])->one();
+                                //$approve = ApprovalStatus::find()->where(['id'=>$apply->approval_status_id])->one();
+                                //check this part
+                                if($model->status == "PENDING")
+                                {
+                                       return Html::a('Pending', ['order-item/approval', 'id' => $model->id], ['class' => 'btn 
+                                        btn-sm btn-warning openModal', 'style' => 'padding: 6px 20px 6px 20px;','size'=>'sm', 'header'=>'Set Approval']); 
+                                    
+                                }
+                                else if($model->status=="IN-PROCESS")
+                                {
+
+                                    return Html::a('In-Process',['order-item/approval','id' => $model->id], ['class' => 'btn btn-sm btn-success openModal', 'style' => 'padding: 6px 20px 6px 20px;','size'=>'sm', 'header'=>'Set Approval']);  
+                                }
+                                 else if($model->status=="COMPLETED")
+                                {
+
+                                    return Html::a('Completed', ['order-item/approval', 'id' => $model->id], ['class' => 'btn 
+                                        btn-sm btn-danger openModal', 'style' => 'padding: 6px 20px 6px 20px;','size'=>'sm', 'header'=>'Set Approval']);  
+                                }
+                                 else if($model->status=="DELIVERED")
+                                {
+
+                                    return Html::a('Delivered', ['order-item/approval', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary openModal', 'style' => 'padding: 6px 20px 6px 20px;','size'=>'sm', 'header'=>'Set Approval']);  
+                                }
+                                
+                                               
+                            },
+                        ],
         ],
     ]); ?>
 

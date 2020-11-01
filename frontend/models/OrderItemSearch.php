@@ -21,7 +21,7 @@ class OrderItemSearch extends OrderItem
     {
         return [
             [['id', 'order_detail_id', 'item_id','no_of_items', 'updated_by'], 'integer'],
-            [['updated_date', 'record_status','customer_id','customer_name'], 'safe'],
+            [['updated_date', 'record_status','customer_id','customer_name','status'], 'safe'],
         ];
     }
 
@@ -69,6 +69,7 @@ class OrderItemSearch extends OrderItem
             'no_of_items' => $this->no_of_items,
             'updated_by' => $this->updated_by,
             'updated_date' => $this->updated_date,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'record_status', $this->record_status])
