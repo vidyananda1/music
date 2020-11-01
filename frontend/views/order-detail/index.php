@@ -6,6 +6,7 @@ use kartik\export\ExportMenu;
 use yii\helpers\ArrayHelper;
 use app\models\Tax;
 use app\models\Offer;
+use app\models\DinningTable;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrderDetailSearch */
@@ -20,16 +21,33 @@ $this->params['breadcrumbs'][] = $this->title;
     
 
     <p>
-        <?= Html::a('Update Order Detail', ['create'], ['class' => 'btn btn-success openModal','size'=>'lg', 'header'=>'Order Update']) ?>
+        <?= Html::a('Create Order Detail', ['create'], ['class' => 'btn btn-success openModal','size'=>'lg', 'header'=>'Order Update']) ?>
     </p>
 
-    <?php  echo $this->render('_search', ['model' => $searchModel,'sum' => $sum,'search'=>$search]); 
+    
+        <div class=" panel panel-success">
+            <div class="panel-heading">
+               <?=$this->render('_search', ['model' => $searchModel,'sum' => $sum,'search'=>$search]); ?> 
+            </div>
+            
+        </div>    
+    <?php  
 
     $gridColumns = [
                     'customer_name_id',
                     'customer_id',
                     'customer_phone',
-                    'table_id',
+                    //'table_id',
+                    [
+                        'attribute'=>'table_id',
+                        'value' => function ($model){
+                                $tab=DinningTable::find()->where(['id'=>$model->table_id])->one();
+                                 return isset($tab) ? $tab->table_name : ' ';
+                        
+                            },
+                                'label'=>'Table No',
+                                'filter'=>'',
+                    ],
                     'price',
                     'discount',
                     //'tax_id',
@@ -83,6 +101,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'price',
                 'filter'=>'',
+            ],
+             //'table_id',
+            [
+                'attribute'=>'table_id',
+                'value' => function ($model){
+                        $tab=DinningTable::find()->where(['id'=>$model->table_id])->one();
+                         return isset($tab) ? $tab->table_name : ' ';
+                
+                    },
+                        'label'=>'Table No',
+                        'filter'=>'',
             ],
             [
                 'attribute'=>'updated_date',

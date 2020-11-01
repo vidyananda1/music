@@ -16,10 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     
 
     <p>
-        <?= Html::a('Create Stock In', ['create'], ['class' => 'btn btn-success openModal','size'=>'md', 'header'=>'Stock Entry']) ?>
+        <?= Html::a('Create Expenses', ['create'], ['class' => 'btn btn-success openModal','size'=>'md', 'header'=>'Stock Entry']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="table table-responsive">
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,6 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template'=>'{update} {delete}'],
         ],
     ]); ?>
-
+</div>
 
 </div>

@@ -58,9 +58,9 @@ foreach($expenses as $key=>$value) {
 
 <br>
 
-<div class="headings">Total Profit: <span style="margin-left: 10px;"><?=$sumIncome-$sumExpenses ?></span></div>
+<div class="headings">Total Profit: Rs<span style="margin-left: 10px;"><?=$sumIncome-$sumExpenses ?></span></div>
 
-<style>
+<style >
     table,th,td {
         border: 1px solid;
         font-family: 'Open Sans';
@@ -75,6 +75,14 @@ foreach($expenses as $key=>$value) {
         text-align: center;
         /* font-weight:bold */
     }
+@media print {
+  header,footer { 
+    display: none; 
+  }
+}
+
+
+
 </style>
 <?php
 //  $url = Url::to(["index"]);

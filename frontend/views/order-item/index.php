@@ -80,7 +80,7 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
                 ],
             ])  
     ?>
-
+    <div class="table table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -188,5 +188,5 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
         ],
     ]); ?>
 
-
+</div>
 </div>
