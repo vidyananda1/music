@@ -237,6 +237,8 @@ function requestSum(arr) {
     const discount_amount =  $("#orderdetail-discount_amount");
     const tax_amount =  $("#orderdetail-tax_amount");
     const url = "'.$url.'";
+    const id = "'.$model->id.'";
+    console.log(id);
     if(tax=="")
         tax = 0 ;
     if(discount=="")
@@ -245,7 +247,7 @@ function requestSum(arr) {
         url : "'.$url.'",
         type : "POST",
         data : {
-            "arr" :arr,"discount":discount,"tax":tax
+            "arr" :arr,"discount":discount,"tax":tax, "update_id":id,
         },
         dataType:"json",
         success : function(response) {              

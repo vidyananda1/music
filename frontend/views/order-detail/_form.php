@@ -237,6 +237,7 @@ function requestSum(arr) {
     const discount_amount =  $("#orderdetail-discount_amount");
     const tax_amount =  $("#orderdetail-tax_amount");
     const url = "'.$url.'";
+    
     if(tax=="")
         tax = 0 ;
     if(discount=="")

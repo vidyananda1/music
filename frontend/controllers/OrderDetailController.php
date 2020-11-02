@@ -200,6 +200,11 @@ class OrderDetailController extends Controller
             }
             
             $amount = round($amount,2);
+            if(isset($data["update_id"])) {
+               $model = $this->findModel($data["update_id"]);
+               $amount = $amount + $model->total;
+            }
+
             $sum = round($sum,2);
             $discount = round($discount,2);
             $tax = round($tax,2);
