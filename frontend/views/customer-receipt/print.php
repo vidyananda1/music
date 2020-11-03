@@ -18,19 +18,19 @@ $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
 ?>
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<div class="row" style='border:solid black 1px;position:relative'>
+<div class="row" style='position:relative'>
   <div class="col-md-12" style="text-align:center;">
-    <div style="font-style:9px">Cash Receipt</div>
+    <div style="font-style:8px">Cash Receipt</div>
     <div class="schoolname"><b>NK CAFE</b></div>
     <div>New Checkon,Imphal</div>
     <div>Pin-795010,Manipur</div>
    
   </div>
   
-  <div style="padding:0px 15px 15px 15px;font-weight:bold">
-    <span style="text-align:left">Receipt No: <?= $receipt->receipt_no ?>  </span>
-    <span style="text-align:right;float:right">Date: <?= date('d/m/Y') ?></span>
+  <div style="text-align: center">
+    Receipt No: <?= $receipt->receipt_no ?>  
   </div>
+  <div style="text-align:center;">Date: <?= date('d/m/Y') ?></div>
   <div class="row" style="padding:0px 15px 15px 15px;">
     <table style="border:solid black 1px;width:100%;">
       <tr style="background:gray;color:white">
@@ -39,14 +39,14 @@ $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
         <td colspan='2'>Price</td>
       </tr>
       <?php foreach($orderItems as $key => $value )  {?>
-      <tr style="font-weight:bold;font-size:13px">
+      <tr style="font-size:11px">
         <td>
           <?php if(isset($itemNames[$value["item_id"]])) {
           echo $itemNames[$value["item_id"]];
         }
         ?>
         </td>
-        <td colspan='2' style="font-weight:bold;font-size:15px"><?=$value["no_of_items"] ?></td>
+        <td colspan='2' ><?=$value["no_of_items"] ?></td>
         <td colspan='2' >Rs <?php if(isset($itemPrices[$value["item_id"]])) {
           echo $itemPrices[$value["item_id"]];
         }
@@ -55,60 +55,60 @@ $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
       <?php } ?>
     </table>
     <table class="nobor" >
-    <tr style="font-weight:bold;font-size:13px">
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Sub Total</span></td>
-        <td colspan='2'>Rs 
+    <tr style="font-size:11px">
+        <td ><span class="total">Sub Total</span></td>
+        <td ><span>Rs 
         <?php if(isset($orderDetails[0]["price"]))
                 echo $orderDetails[0]["price"];
               else  
                 echo "0";
 
-         ?>
+         ?></span>
         </td>
       </tr>
-    	<tr style="font-weight:bold;font-size:13px">
+    	<tr style="font-size:10px">
         <!-- <td style="width:60%"></td> -->
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Tax</span></td>
-        <td colspan='2'>Rs 
+        <td  ><span class="total">Tax</span></td>
+        <td ><span class="total1">Rs 
         <?php if(isset($orderDetails[0]["tax_amount"]))
                 echo $orderDetails[0]["tax_amount"];
               else  
                 echo "0";
 
-         ?>
+         ?></span>
         </td>
       </tr>
-      <tr style="font-weight:bold;font-size:13px">
+      <tr style="font-size:10px">
         <!-- <td style="width:60%"></td> -->
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Discount</span></td>
-        <td colspan='2' >Rs 
+        <td  ><span class="total">Discount</span></td>
+        <td  ><span class="total1">Rs 
           <?php if(isset($orderDetails[0]["discount_amount"]))
                 echo $orderDetails[0]["discount_amount"];
               else  
                 echo "0";
 
-         ?></td>
+         ?></span></td>
       </tr>
-       <tr style="font-weight:bold;font-size:13px">
+       <tr style="font-size:10px">
         <!-- <td style="width:60%"></td> -->
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Total Amount</span></td>
-        <td colspan='2' >Rs 
+        <td  ><span class="total">Total Amount</span></td>
+        <td  ><span class="total1">Rs 
           <?php if(isset($orderDetails[0]["total"]))
                 echo $orderDetails[0]["total"];
               else  
                 echo "0";
 
-         ?></td>
+         ?></span></td>
       </tr>
     </table>
 
-    <Br/>
+    
   
-    <div style="position:absolute;right:5%;top:43%">
+    <div style="position:absolute;right:5%;top:41%">
       <b>Received By</b>
     </div>
   </div>
-  <br><br><br><br>
+  <br><br><br><br><br>
 
 
   <div class="col-md-12" style="text-align:center;">
@@ -118,12 +118,13 @@ $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
     <div>Pin-795010,Manipur</div>
    
   </div>
-  <div style="position: absolute;right:3%;top: 55%">Restuarant's Copy</div>
+  <div style="position: absolute;right:3%;top: 63%">Restuarant's Copy</div>
   
-  <div style="padding:0px 15px 15px 15px;font-weight:bold">
-    <span style="text-align:left">Receipt No: <?= $receipt->receipt_no ?>  </span>
-    <span style="text-align:right;float:right">Date: <?= date('d/m/Y') ?></span>
+  <div style="text-align: center">
+    Receipt No: <?= $receipt->receipt_no ?>    
   </div>
+  <div style="text-align:center;">Date: <?= date('d/m/Y') ?></div>
+  <br><br>
   <div class="row" style="padding:0px 15px 15px 15px;">
     <table style="border:solid black 1px;width:100%;">
       <tr style="background:gray;color:white">
@@ -132,14 +133,14 @@ $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
         <td colspan='2'>Price</td>
       </tr>
       <?php foreach($orderItems as $key => $value )  {?>
-      <tr style="font-weight:bold;font-size:13px">
+      <tr style="font-size:11px">
         <td>
           <?php if(isset($itemNames[$value["item_id"]])) {
           echo $itemNames[$value["item_id"]];
         }
         ?>
         </td>
-        <td colspan='2' style="font-weight:bold;font-size:15px"><?=$value["no_of_items"] ?></td>
+        <td colspan='2' ><?=$value["no_of_items"] ?></td>
         <td colspan='2' >Rs <?php if(isset($itemPrices[$value["item_id"]])) {
           echo $itemPrices[$value["item_id"]];
         }
@@ -148,50 +149,50 @@ $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
       <?php } ?>
     </table>
     <table class="nobor" >
-    <tr style="font-weight:bold;font-size:13px">
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Sub Total</span></td>
-        <td colspan='2'>Rs 
+    <tr style="font-size:10px">
+        <td  ><span class="total">Sub Total</span></td>
+        <td ><span class="total1">Rs 
         <?php if(isset($orderDetails[0]["price"]))
                 echo $orderDetails[0]["price"];
               else  
                 echo "0";
 
-         ?>
+         ?></span>
         </td>
       </tr>
-      <tr style="font-weight:bold;font-size:13px">
+      <tr style="font-size:10px">
         <!-- <td style="width:60%"></td> -->
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Tax</span></td>
-        <td colspan='2'>Rs 
+        <td  ><span class="total">Tax</span></td>
+        <td ><span class="total1">Rs 
         <?php if(isset($orderDetails[0]["tax_amount"]))
                 echo $orderDetails[0]["tax_amount"];
               else  
                 echo "0";
 
          ?>
-        </td>
+        </span></td>
       </tr>
-      <tr style="font-weight:bold;font-size:13px">
+      <tr style="font-size:10px">
         <!-- <td style="width:60%"></td> -->
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Discount</span></td>
-        <td colspan='2' >Rs 
+        <td ><span class="total">Discount</span></td>
+        <td  ><span class="total1">Rs 
           <?php if(isset($orderDetails[0]["discount_amount"]))
                 echo $orderDetails[0]["discount_amount"];
               else  
                 echo "0";
 
-         ?></td>
+         ?></span></td>
       </tr>
-       <tr style="font-weight:bold;font-size:13px">
+       <tr style="font-size:10px">
         <!-- <td style="width:60%"></td> -->
-        <td colspan='2' style="font-weight:bold;font-size:15px"><span class="total">Total Amount</span></td>
-        <td colspan='2' >Rs 
+        <td  ><span class="total">Total Amount</span></td>
+        <td  ><span  class="total1">Rs 
           <?php if(isset($orderDetails[0]["total"]))
                 echo $orderDetails[0]["total"];
               else  
                 echo "0";
 
-         ?></td>
+         ?></span></td>
       </tr>
     </table>
 
@@ -206,7 +207,7 @@ $itemPrices = ArrayHelper::map(Items::find()->all(),"id","price");
 
 <style type="text/css">
 .schoolname {
-  font-size:26px;
+  font-size:20px;
 }
 body, body * {
   font-family: 'Open Sans', sans-serif;
@@ -240,16 +241,19 @@ hr {
   border: none;
   padding: 2px 4px;
 }
-.nobor  {
-  /*border: none;*/
+/*.nobor  {
+  border: none;
   width:100%;
   
-}
+}*/
 .right {
   text-align: right;
 }
 .total {
-  margin-left: 218px;
+  margin-right: 61px;
+}
+.total1 {
+  margin-right: 63px;
 }
 </style>
 
