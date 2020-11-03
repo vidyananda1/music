@@ -237,3 +237,9 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
 
 </div>
 </div>
+<script>
+setTimeout(function() {
+  location.reload();
+}, 10000);
+
+</script>
