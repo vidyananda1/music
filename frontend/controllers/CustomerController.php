@@ -69,7 +69,7 @@ class CustomerController extends Controller
 
         if ($model->load(Yii::$app->request->post()) ) {
             $model->cus_name = strtoupper($model->cus_name);
-            $model->created_by = 1;//Yii::$app->user->id;
+            $model->created_by = Yii::$app->user->id;
 
             $chk= Customer::find()->where(['AND',['cus_name'=>$model->cus_name],['phone'=>$model->phone]])->exists();
             $chk1= Customer::find()->where(['phone'=>$model->phone])->exists();

@@ -41,12 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'template'=>'{update} {delete}'],
 
 
-            // [
-            // 'value' => function ($model) {
-            //   return Html::a('Update', ['stock-in/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-success ']);  
-            //             },
-            //             'format' => 'raw',
-            //         ],
+            [
+            'value' => function ($model) {
+              return Html::a('Update', ['stock-in/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-success ']);  
+                        },
+                        'format' => 'raw',
+                    ],
 
             //['class' => 'yii\grid\ActionColumn','template' => '{update}{delete}',],
 

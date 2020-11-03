@@ -69,7 +69,7 @@ class StockInController extends Controller
 
        if ($model->load(Yii::$app->request->post()) ) {
             $model->item_name = strtoupper($model->item_name);
-            $model->created_by = 1;//Yii::$app->user->id;
+            $model->created_by = Yii::$app->user->id;
             $model->date = date('Y-m-d',strtotime($model->date));
             if(!$model->save()){
                 print_r($model->errors);die;

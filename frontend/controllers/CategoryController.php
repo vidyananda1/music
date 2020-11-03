@@ -68,7 +68,7 @@ class CategoryController extends Controller
 
          if ($model->load(Yii::$app->request->post()) ) {
             $model->cat_name = strtoupper($model->cat_name);
-            $model->created_by = 1;//Yii::$app->user->id;
+            $model->created_by = Yii::$app->user->id;
             if(!$model->save()){
                 print_r($model->errors);die;
                 Yii::$app->session->setFlash('danger', 'Failed to Add Category!');

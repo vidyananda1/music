@@ -11,7 +11,7 @@ use dmstr\widgets\Alert;
     </section>
 </div>
 
-<footer class="main-footer" style="background-color:#a2a1ab">
+<footer class="main-footer" style="background-color:#e7e6ed;">
 	<!-- <div class="pull-left">
 	<img width="100" height="65" src="images/nkgrp.png">
 	</div> -->

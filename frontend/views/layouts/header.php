@@ -31,43 +31,25 @@ date_default_timezone_set('Asia/Kolkata');
                 <li><?=Html::a('Login',Url::to(['site/login']),['class'=>'glyphicon glyphicon-user']) ?></li>
                 <?php }else{ ?>
 
-                <li class="dropdown user user-menu">
+                <li class="dropdown user user-menu" >
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
                        
                         <span class="hidden-xs glyphicon glyphicon-user"> <?= strtoupper(Yii::$app->user->identity->username)?></span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" >
                         <!-- User image -->
-                        <li class="user-header">
-                            <img src="../web/user_image/noimage.jpg" class="img-circle"
-                                 alt="User Image"/>
-
-                        <p>
-                                <?= Yii::$app->user->identity->username ?>
-                                <small>Member since <?php $v = Yii::$app->user->identity->created_at;
-                                    echo date('d-M-Y', $v); ?>
-                                </small>
-                            </p>
-                            
-                        </li>
-                  
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="index.php?r=user/change_password" class="btn btn-default btn-flat">Change Password</a>
-                            </div>
-                            <div class="pull-right">
+                        <li >
+                            <a href="index.php?r=user/change_password"class="btn btn-default btn-flat">Change Password</a>
+                        </li> 
+                        <li>
                                 <?= Html::a(
                                     'Log out',
                                     ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                    ['data-method' => 'post', 'class' => 'btn btn-default  btn-flat']
                                 ) ?>
-                            </div>
-                        </li>
-
-                         <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+                        </li> 
+                  
+                        <!-- Menu Footer-->
                         
                     </ul>
                 </li>

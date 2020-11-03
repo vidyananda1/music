@@ -38,7 +38,7 @@ use dosamigos\datepicker\DatePicker;
                                 'clientOptions' => [
                                     'autoclose' => true,
                                     'todayHighlight' => true,
-                                    'format' => 'dd-mm-yyyy',     
+                                    'format' => 'yyyy-mm-dd',     
 
 
                                 ]

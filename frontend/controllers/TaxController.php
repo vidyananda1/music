@@ -69,7 +69,7 @@ class TaxController extends Controller
 
          if ($model->load(Yii::$app->request->post()) ) {
             $model->tax_name = strtoupper($model->tax_name);
-            $model->created_by = 1;//Yii::$app->user->id;
+            $model->created_by = Yii::$app->user->id;
             if(!$model->save()){
                 print_r($model->errors);die;
                 Yii::$app->session->setFlash('danger', 'Failed to Add Tax!');

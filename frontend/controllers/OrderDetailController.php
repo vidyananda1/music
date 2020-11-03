@@ -104,7 +104,7 @@ class OrderDetailController extends Controller
        if ($model->load(Yii::$app->request->post()) ) {
             $customer_id = "CUS".$this->randomNoGenerator(4);
             $model->customer_id = $customer_id;
-            $model->updated_by = 1;//Yii::$app->user->id;
+            $model->updated_by = Yii::$app->user->id;
 
             $modelitem = Model::createMultiple(OrderItem::classname());
             Model::loadMultiple($modelitem, Yii::$app->request->post());
@@ -121,7 +121,8 @@ class OrderDetailController extends Controller
                     if ($flag = $model->save(false)) {
                         foreach ($modelitem as $sta) {
                             $sta->order_detail_id = $model->id;
-                            $sta->updated_by = 1;//Yii::$app->user->id;
+                            $sta->status = 'PENDING';
+                            $sta->updated_by = Yii::$app->user->id;
                             if (! ($flag = $sta->save(false))) {
                                 //die('4');
                                 $transaction->rollBack();
