@@ -243,7 +243,8 @@ class OrderDetailController extends Controller
                     if ($flag = $model->save(false)) {
                         foreach ($modelitem as $sta) {
                             $sta->order_detail_id = $model->id;
-                            $sta->updated_by = 1;//Yii::$app->user->id;
+                            $sta->status = 'PENDING';
+                            $sta->updated_by = Yii::$app->user->id;
                             if (! ($flag = $sta->save(false))) {
                                 //die('4');
                                 $transaction->rollBack();

@@ -13,7 +13,7 @@ $sale = OrderDetail::find()->where(['record_status'=>'1'])->sum('total');
 
 ?>
 
-<!-- <H2 style="text-align:center;color:#7d9c0e;"><b>NK GROUPS CAFE MANAGEMENT</b></H2> -->
+<H2 style="text-align:center;color:#7665ad;"><b> CAFE MANAGEMENT SYSTEM </b></H2>
   <br>
   <br>
   

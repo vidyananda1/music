@@ -11,11 +11,9 @@ use dmstr\widgets\Alert;
     </section>
 </div>
 
-<footer class="main-footer" style="background-color:#e7e6ed;">
-	<!-- <div class="pull-left">
-	<img width="100" height="65" src="images/nkgrp.png">
-	</div> -->
-    <div class="text-right">
-        <a href="https://pudoncreative.com" target="_blank"><img width="100" height="55" src="images/pudon.png"></a>
-    </div>
+<footer class="main-footer text-right" style="background-color:#e7e6ed;">
+	
+    
+        <a href="https://pudoncreative.com" target="_blank"><img width="80" height="40" src="images/pudon.png"></a>
+    
 </footer>

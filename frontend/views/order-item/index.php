@@ -8,6 +8,7 @@ use app\models\OrderDetail;
 use yii\helpers\ArrayHelper;
 use kartik\export\ExportMenu;
 use app\models\Customer;
+use app\models\DinningTable;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrderItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -37,15 +38,43 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
             //             'label' =>'Customer ID',
             //             'filter' => '',
             // ],
-            [
-                'attribute'=>'order_detail_id',
+             [
+                'attribute' =>'customer_id',
+                'value' => function($model){
+                    return $model->cus->customer_id;
+                },
+                'label' =>'Customer ID',
+                
+            ],
+            // [
+            //     'attribute'=>'order_detail_id',
+            //     'value' => function ($model){
+            //       $ord = OrderDetail::find()->where(['id'=>$model->order_detail_id])->one();
+            //        return isset($ord) ? $ord->customer_name : ' ';
+            
+            //             },
+            //             'format' => 'raw',
+            //             'label' =>'Customer Name',
+            //             // 'filter' => '',
+            // ],
+             // [
+             //    'attribute' =>'customer_name',
+             //    'value' => function($model){
+             //        return $model->cus->customer_name;
+             //    },
+             //    'label' =>'Customer Name',
+                
+             // ],
+              [
+                //'attribute'=>'item_id',
                 'value' => function ($model){
                   $ord = OrderDetail::find()->where(['id'=>$model->order_detail_id])->one();
-                   return isset($ord) ? $ord->customer_name : ' ';
+                  $cus_name = Customer::find()->where(['id'=>$ord->customer_name_id])->one();
+                   return isset($cus_name) ? $cus_name->cus_name : ' ';
             
                         },
                         'format' => 'raw',
-                        'label' =>'Customer Name',
+                        'label' =>'Customer',
                         'filter' => '',
             ],
             //'item_id',
@@ -58,14 +87,52 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
                         },
                         'format' => 'raw',
                         'label' =>'Items',
-                        'filter' => $item,
+                        'filter' => '',
             ],
             //'category_id',
-            //'no_of_items',
             [
-                'attribute'=>'no_of_items',
+                'attribute'=>'item_id',
+                'value' => function ($model){
+                  $itm = Items::find()->where(['id'=>$model->item_id])->one();
+                  $cat = Category::find()->where(['id'=>$itm->category])->one();
+                   return isset($cat) ? $cat->cat_name : ' ';
+            
+                        },
+                        'format' => 'raw',
+                        'label' =>'Category',
+                        'filter' => '',
+            ],
+            [
+                'attribute'=> 'no_of_items',
                 'label'=>'Quantity',
+                'filter'=>''
+            ],
+            [
+                //'attribute'=>'item_id',
+                'label'=>'Table No',
+                'value' => function ($model){
+                  $tab = OrderDetail::find()->where(['id'=>$model->order_detail_id])->one();
+                  $tab_name = DinningTable::find()->where(['id'=>$tab->table_id])->one();
+                   return isset($tab_name) ? $tab_name->table_name : ' ';
+            
+                        },
+                        'format' => 'raw',
+                        'filter' => '',
+            ],
+            // [
+            //     'attribute'=> 'status',
+            //     //'label'=>'Quantity',
+            //     'filter'=>''
+            // ],
 
+            [
+                'attribute'=>'updated_date',
+                'value'=> function ($model){
+                        return date('d-m-Y',strtotime($model->updated_date));
+                
+                    },
+                    'label'=>'Date',
+                    'filter'=>'',
             ],
             //'item_price',
             //'updated_by',
@@ -175,10 +242,22 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
                 'filter'=>''
             ],
             [
-                'attribute'=> 'status',
-                //'label'=>'Quantity',
-                'filter'=>''
+                //'attribute'=>'item_id',
+                'label'=>'Table No',
+                'value' => function ($model){
+                  $tab = OrderDetail::find()->where(['id'=>$model->order_detail_id])->one();
+                  $tab_name = DinningTable::find()->where(['id'=>$tab->table_id])->one();
+                   return isset($tab_name) ? $tab_name->table_name : ' ';
+            
+                        },
+                        'format' => 'raw',
+                        'filter' => '',
             ],
+            // [
+            //     'attribute'=> 'status',
+            //     //'label'=>'Quantity',
+            //     'filter'=>''
+            // ],
 
             [
                 'attribute'=>'updated_date',
@@ -198,8 +277,9 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
             // ['class' => 'yii\grid\ActionColumn'],
 
              [
-                             // 'attribute' => 'approval',
-                            'label' =>'Approval',
+                            'attribute' => 'status',
+                            'filter'=>'',
+                            'label' =>'Status',
                             'format' => 'raw',
                             'value' => function ($model)
                              {
@@ -240,6 +320,6 @@ $item= ArrayHelper::map(Items::find()->all(), 'id', 'name');
 <script>
 setTimeout(function() {
   location.reload();
-}, 10000);
+}, 60000);
 
 </script>

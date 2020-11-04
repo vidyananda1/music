@@ -21,8 +21,8 @@ body {
 .footer {
     height: 100px;
     background-color: #1b1b1b;
-    border-top: 1px solid #262626;
-    padding-top: 20px;
+    /*border-top: 1px solid #262626;*/
+    padding-top: 5px;
     color: #899191;
 }
 

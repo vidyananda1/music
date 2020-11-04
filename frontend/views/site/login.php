@@ -6,11 +6,12 @@ $this->title = 'Sign In';
 
 ?>
 <div>
-    <img style="width: 100%;z-index: -1;filter: blur(1px);" src="images/food.jpg">
+    <img style="width: 100%;z-index: -1;" src="images/theme.jpg">
 </div>
-<div >
+
+<!-- <div >
       <img class="name" src="images/nklogo.jpeg">
-    </div>
+    </div> -->
     <br>
 <div class="log">
     
@@ -43,10 +44,10 @@ $this->title = 'Sign In';
 <style type="text/css">
     .log{
         position: absolute;
-        left:65%;
+        left:35%;
         top:23%;
         width: 30%;
-        box-shadow: 15px 15px 10px #241d16;
+        box-shadow: 15px 15px 15px #241d16;
         
     }
     .name{
@@ -56,4 +57,5 @@ $this->title = 'Sign In';
         opacity: 0.8;
         width: 100%;
     }
+
 </style>

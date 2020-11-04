@@ -34,35 +34,71 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php  
 
     $gridColumns = [
-                    'customer_name_id',
-                    'customer_id',
-                    'customer_phone',
-                    //'table_id',
-                    [
-                        'attribute'=>'table_id',
-                        'value' => function ($model){
-                                $tab=DinningTable::find()->where(['id'=>$model->table_id])->one();
-                                 return isset($tab) ? $tab->table_name : ' ';
-                        
-                            },
-                                'label'=>'Table No',
-                                'filter'=>'',
-                    ],
-                    'price',
-                    'discount',
-                    //'tax_id',
-                    [
-                        'attribute'=>'tax_id',
-                        'value' => function ($model){
-                            $tax = Tax::find()->where(['id'=>$model->tax_id])->one();
-                            return isset($ord) ? $ord->customer_name : ' ';
+                     [
+                'attribute' =>'customer_name_id',
+                'value' => function($model){
+                    return $model->customer->cus_name;
+                },
+                'label' =>'Customer Name',
+                
+            ],
+            'customer_id',
             
-                        },
-                        'format' => 'raw',
-                        'label' =>'Tax',
-                        'filter' => '',
-                    ],
-                    'total',
+            'customer_phone',
+            
+            [
+                'attribute'=>'price',
+                'filter'=>'',
+            ],
+             //'table_id',
+            [
+                'attribute'=>'table_id',
+                'value' => function ($model){
+                        $tab=DinningTable::find()->where(['id'=>$model->table_id])->one();
+                         return isset($tab) ? $tab->table_name : ' ';
+                
+                    },
+                        'label'=>'Table No',
+                        'filter'=>'',
+            ],
+            [
+                'attribute'=>'updated_date',
+                   'value' => function ($model){
+                        return date('d-m-Y',strtotime($model->updated_date));
+                
+                    },
+                        'label'=>'Date',
+                        'filter'=>'',
+            ],
+
+            //'discount',
+            [
+                'attribute'=>'discount',
+                'value' => function ($model){
+                    $offer = Offer::find()->where(['id'=>$model->discount])->one();
+                    return isset($offer) ? $offer->dis_name : ' ';
+            
+                },
+                'format' => 'raw',
+                'label' =>'Discount',
+                'filter' => '',
+            ],
+            //'tax_id',
+            [
+                'attribute'=>'tax_id',
+                'value' => function ($model){
+                    $tax = Tax::find()->where(['id'=>$model->tax_id])->one();
+                    return isset($tax) ? $tax->tax_name : ' ';
+            
+                },
+                'format' => 'raw',
+                'label' =>'Tax',
+                'filter' => '',
+            ],
+            [
+                'attribute'=>'total',
+                'filter'=>'',
+            ],
 
     ];
 
