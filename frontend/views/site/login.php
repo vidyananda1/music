@@ -5,13 +5,12 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Sign In';
 
 ?>
-<div>
-    <img style="width: 100%;z-index: -1;" src="images/theme.jpg">
-</div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- <div >
-      <img class="name" src="images/nklogo.jpeg">
-    </div> -->
+
+<div id="bg">
+      <img class="name" src="images/theme.jpg">
+    </div>
     <br>
 <div class="log">
     
@@ -27,10 +26,10 @@ $this->title = 'Sign In';
             ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-md-6">
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
             </div>
-            <div class="col-xs-4">
+            <div class="col-md-6">
                 <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
             </div>
         </div>
@@ -44,18 +43,29 @@ $this->title = 'Sign In';
 <style type="text/css">
     .log{
         position: absolute;
-        left:35%;
+        left:29%;
         top:23%;
-        width: 30%;
+        width: 40%;
         box-shadow: 15px 15px 15px #241d16;
         
     }
-    .name{
-        position: absolute;
-        
-        top:0%;
-        opacity: 0.8;
-        width: 100%;
-    }
+    #bg {
+          position: fixed; 
+          top: -50%; 
+          left: -50%; 
+          width: 200%; 
+          height: 200%;
+        }
+#bg img {
+          position: absolute; 
+          top: 0; 
+          left: 0; 
+          right: 0; 
+          bottom: 0; 
+          margin: auto; 
+          min-width: 50%;
+          min-height: 50%;
+        }
+   
 
 </style>
