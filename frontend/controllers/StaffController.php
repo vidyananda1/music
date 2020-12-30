@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\rbac\DbManager;
 use kartik\form\ActiveForm;
+use app\models\AuthAssignment;
 /**
  * StaffController implements the CRUD actions for Staff model.
  */
@@ -120,23 +121,33 @@ class StaffController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ( Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) ) {
-            Yii::$app->response->format = 'json';
-            return ActiveForm::validate($model);
-        }
+        $authManager = new \Yii::$app->authManager();
+        $user_id = $model->user_id;
+        $getRole = $authManager->getRolesByUser($user_id);
+        $role_name = array_keys($getRole)[0];
+        $model->name = $role_name;
+        //cannot change user name, it should be unique 
+        //if ( Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) ) {
+        //     Yii::$app->response->format = 'json';
+        //     return ActiveForm::validate($model);
+        // }
 
         if ($model->load(Yii::$app->request->post())) {
-            $auth = new DbManager;
-                $auth->init();
-                $role = $auth->getRole($model->name);
-                
-                $user_id = $model->user_id;
-                $auth->assign($role, $user_id);
+            $transaction = Yii::$app->db->beginTransaction();
+            if($model->name != $role_name) {
+                $new_role = $authManager->getRole($model->name);
+                $old_role = $authManager->getRole($role_name);
+                $authManager->revoke($old_role,$user_id);
+                $authManager->assign($new_role,$user_id);
+            }
             if(!$model->save()) {
                 print_r($model->errors);
             }
-
-            return $this->redirect(['view', 'id' => $model->id]);
+            else{
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', 'User updated Successfully !!');
+            }
+            return $this->redirect(['staff/index']);
         }
 
         return $this->render('update', [

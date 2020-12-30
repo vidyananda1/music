@@ -18,6 +18,7 @@ class AuthAssignment extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $role,$user_id;
     public static function tableName()
     {
         return 'auth_assignment';
@@ -64,6 +65,16 @@ class AuthAssignment extends \yii\db\ActiveRecord
         $employee = Staff::find()->where(['user_id'=>$user_id])->one();
         $authAssignment = AuthAssignment::find()->where(['user_id'=>$user_id])->one();
         return $authAssignment->item_name;
+    }
+
+    public function setRole() {
+        $user_id = $this->user_id;
+        $employee = Staff::find()->where(['user_id'=>$user_id])->one();
+        $authAssignment = AuthAssignment::find()->where(['user_id'=> $this->$user_id])->one();
+        // return $authAssignment->item_name;
+        $authAssignment->item_name = $this->role;
+        $authAssignment->save();
+
     }
 
     public static function Role() {
