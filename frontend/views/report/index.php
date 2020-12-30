@@ -12,62 +12,49 @@ use app\models\Customer;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DateRangePicker;
 
-$this->title = 'Reports';
+// $this->title = 'Reports';
 ?>
 
-<div class="headings">Income</div>
+<div class="headings"><h3><b>Income Break-Up</b></h3></div>
     
 
 <table style="border:solid black 1px;width:100%;">
     <tr>
-        <th>Cutomer Name</th><th>Sale(in Rs.)</th><th>Order Date</th>
+        <th>Producer Name</th>
+        <th>Registration ID</th>
+        <th>Amount to be paid</th>
+        <th>Due Amount</th>
+        <th>Amount Received</th>
+        <th>Date</th>
     </tr>
 
 <?php
 foreach($incomes as $key=>$value) { 
 ?>
 <tr>
-    <td><?=$value["cus_name"]?></td>
-    <td><?=$value["total"]?></td>
-    <td><?= date('d-m-Y',strtotime($value["updated_date"]))?></td>
-</tr>
-<?php } ?>
-<tr><td class="sub-header">Total Income(in Rs.)</td><td colspan="2" class="sub-header"><?=$sumIncome?></td></tr>
-</table>
-<br><br><br>
-<div class="headings">Expenses</div>
-<table style="border:solid black 1px;width:100%;">
-<tr>
-        <th>Item</th><th>Price(in Rs.)</th><th>Date</th>
-    </tr>
-<?php
-
-foreach($expenses as $key=>$value) { 
-?>
-<tr>
-    <td><?=$value["item_name"]?></td>
-    <td><?=$value["price"]?></td>
+    <td><?=$value["name"]?></td>
+    <td><?=$value["registration_id"]?></td>
+    <td><?=$value["total_amount"]?></td>
+    <td><?=$value["balance_amount"]?></td>
+    <td><?=$value["paid_amount"]?></td>
     <td><?= date('d-m-Y',strtotime($value["date"]))?></td>
 </tr>
-
-
 <?php } ?>
-<tr><td class="sub-header">Total Expenses(in Rs.)</td><td colspan="2" class="sub-header"><?=$sumExpenses?></td></tr>
-
+<tr style="font-weight: bold"><td class="sub-header" colspan="4">Net Income</td><td colspan="2" class="sub-header"> Rs <?=$sumIncome?></td></tr>
 </table>
+<br><br><br>
 
-<br>
-
-<div class="headings">Total Profit: Rs<span style="margin-left: 10px;"><?=$sumIncome-$sumExpenses ?></span></div>
 
 <style >
     table,th,td {
         border: 1px solid;
         font-family: 'Open Sans';
         text-align: center;
+        padding: 8px 4px 8px 4px;
+        font-size:15px;
     }
     .headings{
-        font-size: 1.5em;
+        /*font-size: 1.5em;*/
         font-family: 'Open Sans';
         /* margin-left: 50px; */
     }

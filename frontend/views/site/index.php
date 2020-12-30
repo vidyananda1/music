@@ -6,14 +6,14 @@ use app\models\Employee;
 
 $this->title = '';
 
-$emp = Employee::find()->where(['record_status'=>'1'])->count();
-$itm = Items::find()->where(['OR',['quantity'=>'FULL'],['quantity'=>'NONE']])->count();
-$cus = OrderDetail::find()->where(['record_status'=>'1'])->count();
-$sale = OrderDetail::find()->where(['record_status'=>'1'])->sum('total');
+// $emp = Employee::find()->where(['record_status'=>'1'])->count();
+// $itm = Items::find()->where(['OR',['quantity'=>'FULL'],['quantity'=>'NONE']])->count();
+// $cus = OrderDetail::find()->where(['record_status'=>'1'])->count();
+// $sale = OrderDetail::find()->where(['record_status'=>'1'])->sum('total');
 
 ?>
 
-<H2 style="text-align:center;color:#7665ad;"><b> CAFE MANAGEMENT SYSTEM </b></H2>
+<H2 style="color:#7665ad;"><b> Hello! Gleeson Audio </b></H2>
   <br>
   <br>
   
@@ -31,10 +31,11 @@ $today = date('Y-m-d');
     <div class="col-lg-6 col-xs-6">
           <!-- small box -->
           <div class="small-box" style="background-color:#8df28e">
+            
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF EMPLOYEES</b></h4>
+              <h4 style="text-align:center;"><b>NO OF CLIENTS</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b><?= $emp ?></b></h4></div>
+            <div><h4 style="text-align:center;"><b>30</b></h4></div>
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
@@ -46,11 +47,11 @@ $today = date('Y-m-d');
           <!-- small box -->
           <div class="small-box" style="background-color:#96cafa">
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF ITEMS</b></h4>
+              <h4 style="text-align:center;"><b>NO OF SONGS DELIVERED</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b> <?= $itm ?></b></h4></div>
+            <div><h4 style="text-align:center;"><b>10</b></h4></div>
             <div class="icon">
-              <i class="fa fa-cutlery"></i>
+              <i class="fa fa-headphones"></i>
             </div>
             
                 <a href="index.php?r=items/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
@@ -63,11 +64,11 @@ $today = date('Y-m-d');
           <!-- small box -->
           <div class="small-box" style="background-color:#ffd359">
             <div class="inner">
-              <h4 style="text-align:center;"><b>TOTAL CUSTOMERS</b></h4>
+              <h4 style="text-align:center;"><b>NO OF SONGS PENDING</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b><?= $cus ?></b></h4></div>
+            <div><h4 style="text-align:center;"><b>30</b></h4></div>
             <div class="icon">
-              <i class="fa fa-user-plus"></i>
+              <i class="fa fa-headphones"></i>
             </div>
             
                 <a  class="small-box-footer"> </a> 
@@ -77,9 +78,9 @@ $today = date('Y-m-d');
           <!-- small box -->
           <div class="small-box" style="background-color:#a489f5">
             <div class="inner">
-              <h4 style="text-align:center;"><b>TOTAL SALES</b></h4>
+              <h4 style="text-align:center;"><b>NET INCOME TILL NOW</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>Rs <?= $sale ?></b></h4></div>
+            <div><h4 style="text-align:center;"><b>Rs 150000</b></h4></div>
             <div class="icon">
               <i class="fa fa-money"></i>
             </div>

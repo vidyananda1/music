@@ -2,12 +2,9 @@
 
 namespace frontend\controllers;
 
-use app\models\OrderDetail;
-use app\models\StockIn;
+use app\models\Registration;
 use app\models\Report;
 use Yii;
-use app\models\Tax;
-use app\models\TaxSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -46,18 +43,16 @@ class ReportController extends Controller
         if($model->load(Yii::$app->request->queryParams)) {
             $startDate = $model->start_date;
             $endDate  = $model->end_date;
-            $incomes = OrderDetail::find()->leftJoin('customer','customer.id=order_detail.customer_name_id')->select('order_detail.updated_date,total,cus_name')->asArray()->where(['between','date(order_detail.updated_date)',$startDate,$endDate])->groupBy('order_detail.updated_date,customer_name_id')->all();
-            $sumIncome = OrderDetail::find()->select('SUM(total) as total')->asArray()->where(['between','date(updated_date)',$startDate,$endDate])->all();
-            $epenses = StockIn::find()->select('item_name,price,date')->where(['between','date(date)',$startDate,$endDate])->andWhere(['record_status'=>1])->all();
-            $sumExpenses = StockIn::find()->select('SUM(price) as total')->asArray()->where(['between','date(date)',$startDate,$endDate])->andWhere(['record_status'=>1])->all();
+            $incomes = Registration::find()->leftJoin('client','client.id=registration.producer_name_id')->select('client.producer_name AS name,registration_id,total_amount,paid_amount,balance_amount,date')->asArray()->where(['between','date(registration.date)',$startDate,$endDate])->groupBy('registration.created_date,producer_name_id')->all();
+            $sumIncome = Registration::find()->select('SUM(paid_amount) as total')->asArray()->where(['between','date(created_date)',$startDate,$endDate])->all();
+            // $epenses = StockIn::find()->select('item_name,price,date')->where(['between','date(date)',$startDate,$endDate])->andWhere(['record_status'=>1])->all();
+            // $sumExpenses = StockIn::find()->select('SUM(price) as total')->asArray()->where(['between','date(date)',$startDate,$endDate])->andWhere(['record_status'=>1])->all();
             // print_r($sumIncome[0]['total']);die;
             return $this->render('index', [
                 // 'searchModel' => $searchModel,
                 // 'dataProvider' => $dataProvider,
                 'incomes' => $incomes,
-                'expenses'=>$epenses,
                 'sumIncome' => $sumIncome[0]['total'],
-                'sumExpenses' => $sumExpenses[0]['total'],
                 'model' => $model,
             ]);
         }

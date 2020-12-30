@@ -9,12 +9,16 @@ $this->title = 'Sign In';
 
 
 <div id="bg">
-      <img class="name" src="images/theme.jpg">
+      <img class="name" src="images/music.jpg">
     </div>
     <br>
-<div class="log">
+<div class="row">
+  <div class="col-md-6"></div>
+  <div class="col-md-6">
+    <br><br>
+    <div class="log" style="padding: 30px;">
     
-    <div class="login-box-body login">
+    <div class="login-box-body login" style="box-shadow: 4px 6px 12px #211f4d">
         <p class="login-box-msg">Sign in to start your session</p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
@@ -40,15 +44,12 @@ $this->title = 'Sign In';
 
     </div>
 </div>
+  </div>
+  
+</div>
+
 <style type="text/css">
-    .log{
-        position: absolute;
-        left:29%;
-        top:23%;
-        width: 40%;
-        box-shadow: 15px 15px 15px #241d16;
-        
-    }
+    
     #bg {
           position: fixed; 
           top: -50%; 

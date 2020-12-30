@@ -15,30 +15,25 @@
     $items = [
         ['label' => 'Home','icon' => 'home', 'url' => ['/site/index']],
         // ['label' => 'Gii', 'url' => ['/gii']],
-        ['label' => 'CUSTOMERS','icon' => 'user', 'url' => ['/customer']],
-        ['label' => 'ORDER DETAILS','icon' => 'shopping-cart', 'url' => ['/order-detail']],
-        ['label' => 'ITEMS ORDERED','icon' => 'gift', 'url' => ['/order-item']],
-        ['label' => 'RECEIPT', 'icon' => 'list-alt','url' => ['/customer-receipt']],
-        ['label' => 'EXPENSES', 'icon' => 'folder-open', 'url' => ['/stock-in']],
-        ['label' => 'REPORTS', 'icon' => 'folder-open', 'url' => ['/report']],
+        ['label' => 'Clients','icon' => 'user', 'url' => ['/client']],
+        ['label' => 'Clients-Registration','icon' => 'pencil', 'url' => ['/registration']],
+        ['label' => 'Reports','icon' => 'folder-open', 'url' => ['/report']],
+       
      ];
      if($display!="hide") {
          array_push($items,[
-            'label' => 'SET-UP',
+            'label' => 'Settings',
             'icon' => ' fa fa-cog ',
             'options'=>['class'=>"styleMAn"],
             'items' => [
-                ['label' => 'CATEGORY', 'url' => ['/category']],
-                ['label' => 'ITEMS', 'url' => ['/items']],
-                ['label' => 'TAX', 'url' => ['/tax']],
-                ['label' => 'OFFER', 'url' => ['/offer']],
-                ['label' => 'EMPLOYEES', 'url' => ['/employee']],
-                ['label' => 'TABLES', 'url' => ['/dinning-table']],
+                ['label' => 'Discount', 'url' => ['/discount']],
+                ['label' => 'User Management', 'url' => ['/staff']],
+               
             ],
         ]);
      }
 ?>
-<aside class="main-sidebar" >
+<aside class="main-sidebar" style="box-shadow: 2px 2px 5px gray">
 
     <section class="sidebar">
 
@@ -53,32 +48,20 @@
                 'items' => [
                     ['label' => 'Home','icon' => 'home', 'url' => ['/site/index']],
                     // ['label' => 'Gii', 'url' => ['/gii']],
-                    ['label' => 'ORDER DETAILS', 'url' => ['/order-detail']],
-                    ['label' => 'RECEIPT', 'url' => ['/customer-receipt']],
-                    ['label' => 'ORDER ITEMS', 'url' => ['/order-item']],
-                    // ['label' => 'ACTIVITY', 'url' => ['/activity']],
-                    // ['label' => 'STOCK', 'url' => ['/stock-ledger']],
-                    // ['label' => 'ASSIGN VOTER', 'url' => ['/voter-assign']],
-                    // [
-                    //     'label' => 'ELECTION ANALYSIS',
-                    //     'icon' => ' fa fa-tasks ',
-                    //     'items' => [
-                    //         ['label' => 'PREVIOUS RESULT', 'url' => ['/result']],
-                    //         ['label' => 'WORKERS', 'url' => ['/workers']],
-                    //         ['label' => 'VOTERS TURN-OUT', 'url' => ['/no-of-voters']],
-                    // ]],
+                    ['label' => 'Clients','icon' => 'user', 'url' => ['/client']],
+                    ['label' => 'Clients-Registration','icon' => 'pencil', 'url' => ['/registration']],
+                    ['label' => 'Reports','icon' => 'folder-open', 'url' => ['/report']],
 
-                    [
-                        'label' => 'SET-UP',
-                        'icon' => ' fa fa-cog ',
-                        'items' => [
-                            ['label' => 'CATEGORY', 'url' => ['/category']],
-                            ['label' => 'ITEMS', 'url' => ['/items']],
-                            ['label' => 'TAX', 'url' => ['/tax']],
-                            ['label' => 'OFFER', 'url' => ['/offer']],
-                            ['label' => 'EMPLOYEES', 'url' => ['/employee']],
-                    ]],
-                ],
+                   [
+                    'label' => 'Settings',
+                    'icon' => ' fa fa-cog ',
+                    'options'=>['class'=>"styleMAn"],
+                    'items' => [
+                        ['label' => 'Discount', 'url' => ['/discount']],
+                        ['label' => 'User Management', 'url' => ['/staff']],
+                       
+                    ],
+                ]],
 
                 'items' => $items,
 

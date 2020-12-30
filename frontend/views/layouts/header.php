@@ -8,12 +8,12 @@ date_default_timezone_set('Asia/Kolkata');
 
 ?>
 
-<header class="main-header"  >
+<header class="main-header"  style="box-shadow: 0px 1px 3px gray">
 
 <?= Html::csrfMetaTags() ?>
 
     
-     <?= Html::a('<span class="logo-mini">ED</span><span class="logo-lg">DEMO</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+     <?= Html::a('<span class="logo-mini">GLEESON-AUDIO</span><span class="logo-lg">GLEESON-AUDIO</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
     <nav class="navbar navbar-static-top " role="navigation" >
 
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

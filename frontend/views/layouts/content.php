@@ -14,6 +14,6 @@ use dmstr\widgets\Alert;
 <footer class="main-footer text-right" style="background-color:#e7e6ed;">
 	
     
-        <a href="https://pudoncreative.com" target="_blank"><img width="80" height="40" src="images/pudon.png"></a>
+        <!-- <img width="80" height="40" src=""> -->
     
 </footer>
