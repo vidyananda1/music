@@ -179,8 +179,18 @@ class StaffController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $transaction = Yii::$app->db->beginTransaction();
+        $staff = $this->findModel($id);
+        $user = \common\models\User::findOne($staff->user_id);
+        if(!$user->delete()) {
+            $transaction->rollBack();
+            print_r($user->errors);die;
+        }
+        if(!$staff->delete()) {
+            $transaction->rollBack();
+            print_r($user->errors);die;
+        }
+        $transaction->commit();
         return $this->redirect(['index']);
     }
 
