@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use frontend\models\ChangePassword;
-
+use yii\filters\AccessControl;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -28,6 +28,22 @@ class UserController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['*'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['login'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        // 'actions' => ['index','create','update','view'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -38,6 +54,8 @@ class UserController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserSearch();
+        // $param = Yii::$app->request->queryParams;
+        // print_r($param);die;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -161,7 +179,7 @@ class UserController extends Controller
     
     
     
-    public function actionReset_password($id) {
+    public function actionResetPassword($id) {
        
         $user = $this->findModel($id);
         $user->password = "123456";
