@@ -135,7 +135,7 @@ class RegistrationController extends Controller
             //$reg_id = "GA".$this->randomNoGenerator(4);
             //$model->registration_id = $reg_id;
             $model->updated_by = Yii::$app->user->id;
-            $model->updated_date = date('h:i:s');
+            $model->updated_date = date("Y-m-d h:i:s");
 
             if(!$model->save()){
                 print_r($model->errors);die;

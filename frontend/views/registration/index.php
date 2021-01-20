@@ -222,9 +222,12 @@ $deliver=[ 'DELIVERED' => 'DELIVERED', 'PENDING' => 'PENDING', 'UNDER PROCESS' =
                         'attribute'=>'payment_status',
                         'contentOptions' => function ($model) {
                             if($model->payment_status == "FULL PAYMENT"){
-                                return ['class'=>'label label-success','style' => 'font-style:oblique;font-size:10px'];
-                            }else{
-                                 return ['class'=>'label label-danger','style' => 'font-style:oblique;font-size:10px'];
+                                return ['class'=>'label label-success','style' => 'font-style:oblique;font-size:9px;border-radius:50px 20px;box-shadow:2px 2px 4px gray'];
+                            }elseif($model->payment_status == "PARTIAL PAYMENT"){
+                                return ['class'=>'label label-info','style' => 'font-style:oblique;font-size:9px;border-radius:50px 20px;box-shadow:2px 2px 4px gray'];
+                            }
+                            else{
+                                 return ['class'=>'label label-danger','style' => 'font-style:oblique;font-size:9px;border-radius:50px 20px;box-shadow:2px 2px 4px gray'];
                             }
 
                         },
@@ -268,13 +271,13 @@ $deliver=[ 'DELIVERED' => 'DELIVERED', 'PENDING' => 'PENDING', 'UNDER PROCESS' =
 
              [
                 'value' => function ($model) {
-                  return Html::a('Print', ['registration/print', 'id' => $model->id], ['class' => 'btn btn-md btn-primary','target'=>'_blank']);  
+                  return Html::a('Print', ['registration/print', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary','target'=>'_blank']);  
                             },
                             'format' => 'raw',
             ],
             [
                 'value' => function ($model) {
-                  return Html::a('Update', ['registration/update', 'id' => $model->id], ['class' => 'btn btn-md btn-warning openModal','size'=>'lg', 'header'=>'Update Your Order Here']);  
+                  return Html::a('Update', ['registration/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-warning openModal','size'=>'lg', 'header'=>'Update Your Order Here']);  
                             },
                             'format' => 'raw',
             ],

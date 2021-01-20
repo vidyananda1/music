@@ -42,11 +42,11 @@ class Registration extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['producer_name_id', 'registration_id', 'no_of_songs', 'price_per_song', 'to_be_paid', 'total_amount', 'payment_status', 'delivery_status', 'created_by','date','singer_name'], 'required'],
+            [['producer_name_id', 'registration_id', 'no_of_songs', 'price_per_song', 'to_be_paid', 'total_amount', 'payment_status', 'delivery_status', 'created_by','date','paid_amount','singer_name'], 'required'],
             [['producer_name_id',  'no_of_songs', 'price_per_song', 'discount', 'created_by', 'updated_by'], 'integer'],
-            [['to_be_paid', 'discount_amount', 'total_amount', 'refund_amount'], 'number'],
+            [['to_be_paid', 'discount_amount','paid_amount', 'total_amount', 'refund_amount'], 'number'],
             [['payment_status','registration_id', 'delivery_status','singer_name'], 'string'],
-            [['created_date', 'updated_date','date','paid_amount','balance_amount'], 'safe'],
+            [['created_date', 'updated_date','date','balance_amount'], 'safe'],
             [['cancel_reason'], 'string', 'max' => 255],
             [['record_status'], 'string', 'max' => 1],
         ];

@@ -1,19 +1,20 @@
 <?php
 use app\models\OrderDetail;
-use app\models\Items;
-use app\models\Employee;
+use app\models\Client;
+use app\models\Registration;
 //use app\models\Counterno;
 
 $this->title = '';
 
-// $emp = Employee::find()->where(['record_status'=>'1'])->count();
-// $itm = Items::find()->where(['OR',['quantity'=>'FULL'],['quantity'=>'NONE']])->count();
-// $cus = OrderDetail::find()->where(['record_status'=>'1'])->count();
-// $sale = OrderDetail::find()->where(['record_status'=>'1'])->sum('total');
+$cl = Client::find()->where(['record_status'=>'1'])->count();
+$deliver = Registration::find()->where(['delivery_status'=>'DELIVERED'])->count();
+$pend = Registration::find()->where(['delivery_status'=>'PENDING'])->count();
+$income = Registration::find()->where(['record_status'=>'1'])->sum('paid_amount');
+$due = Registration::find()->where(['record_status'=>'1'])->sum('balance_amount');
 
 ?>
 
-<H2 style="color:#7665ad;"><b> Hello! Gleeson Audio </b></H2>
+<H2 style="color:#7665ad;"><b> <!-- Hello! Gleeson Audio --> </b></H2>
   <br>
   <br>
   
@@ -28,33 +29,49 @@ $today = date('Y-m-d');
 
 ?>
 <div class="row">
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-4 col-xs-4">
           <!-- small box -->
           <div class="small-box" style="background-color:#8df28e">
             
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF CLIENTS</b></h4>
+              <h4 ><b>NO OF CLIENTS</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>30</b></h4></div>
+            <div><h4 style="text-align: center"><b><?= $cl ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            
-                <a href="index.php?r=employee/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
+            <br>
+                <a  class="small-box-footer"> </a>
+                <!-- <a href="index.php?r=client/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a>  -->
           </div>
     </div>
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-4 col-xs-4">
           <!-- small box -->
           <div class="small-box" style="background-color:#96cafa">
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF SONGS DELIVERED</b></h4>
+              <h4 ><b>NO OF SONGS DELIVERED</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>10</b></h4></div>
+            <div><h4 style="text-align: center"><b><?= $deliver ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-headphones"></i>
             </div>
-            
-                <a href="index.php?r=items/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a> 
+                <br>
+                <a  class="small-box-footer"> </a>
+                <!-- <a href="index.php?r=items/index" class="small-box-footer">ADD +<i class="fa fa-arrow-circle-right"></i></a>  -->
+          </div>
+    </div>
+    <div class="col-lg-4 col-xs-4">
+          <!-- small box -->
+          <div class="small-box" style="background-color:#f5a4ee">
+            <div class="inner">
+              <h4 ><b>NO OF SONGS PENDING</b></h4>
+            </div>
+            <div><h4 style="text-align: center"><b><?= $pend ?></b></h4></div>
+            <div class="icon">
+              <i class="fa fa-headphones"></i>
+            </div>
+                <br>
+                <a  class="small-box-footer"> </a> 
           </div>
     </div>
  </div>
@@ -62,15 +79,15 @@ $today = date('Y-m-d');
  <div class="row">
     <div class="col-lg-6 col-xs-6">
           <!-- small box -->
-          <div class="small-box" style="background-color:#ffd359">
+          <div class="small-box" style="background-color:#f5a98e">
             <div class="inner">
-              <h4 style="text-align:center;"><b>NO OF SONGS PENDING</b></h4>
+              <h4 style="text-align:center;"><b>Amount Due Till Now</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>30</b></h4></div>
+            <div><h4 style="text-align:center;"><b>Rs <?= $due ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-headphones"></i>
             </div>
-            
+                <br>
                 <a  class="small-box-footer"> </a> 
           </div>
     </div>
@@ -80,11 +97,11 @@ $today = date('Y-m-d');
             <div class="inner">
               <h4 style="text-align:center;"><b>NET INCOME TILL NOW</b></h4>
             </div>
-            <div><h4 style="text-align:center;"><b>Rs 150000</b></h4></div>
+            <div><h4 style="text-align:center;"><b>Rs <?= $income ?></b></h4></div>
             <div class="icon">
               <i class="fa fa-money"></i>
             </div>
-            
+                <br>
                 <a  class="small-box-footer"> </a> 
           </div>
     </div>

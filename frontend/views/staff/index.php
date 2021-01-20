@@ -41,7 +41,7 @@ use yii\grid\GridView;
             //'created_date',
             //'record_status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

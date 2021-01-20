@@ -24,9 +24,9 @@ if (Yii::$app->controller->action->id === 'login') {
         <title>Music Studio <?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="hold-transition skin-purple sidebar-mini">
+    <body class="hold-transition skin-purple sidebar-mini" >
     <?php $this->beginBody() ?>
-    <div class="wrapper">
+    <div class="wrapper" style="background-color: #e7e6ed;">
 
         <?= $this->render(
             'header.php',
